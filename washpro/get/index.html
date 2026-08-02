@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WashPro'yu indir</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💧</text></svg>">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:linear-gradient(160deg,#0E7490,#155E75);
+       color:#fff;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;text-align:center}
+  .wrap{max-width:380px}
+  .logo{font-size:64px;margin-bottom:10px}
+  h1{font-size:26px;font-weight:800;margin-bottom:6px}
+  p{font-size:15px;opacity:.85;line-height:1.5;margin-bottom:26px}
+  .btn{display:block;background:#fff;color:#0E7490;text-decoration:none;font-weight:800;font-size:15px;
+       padding:15px 20px;border-radius:14px;margin-bottom:12px}
+  .muted{font-size:12px;opacity:.6;margin-top:14px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="logo">💧</div>
+  <h1>WashPro</h1>
+  <p>Araç yıkama işletmeni cebinden yönet: kuyruk panosu, plaka okuma, sadakat kartı, tahmini teslim saati.</p>
+  <div id="links">
+    <p style="opacity:.9;font-weight:700">Çok yakında App Store ve Google Play'de!</p>
+  </div>
+  <div class="muted">tanrikuluapps.com</div>
+</div>
+<script>
+  // Magaza linkleri yayimlaninca doldurulacak; dolunca cihaza gore
+  // otomatik yonlendirir, ikisi de doluysa dogru olanina gider.
+  const APP_STORE = '';   // ör: https://apps.apple.com/app/id0000000000
+  const PLAY_STORE = '';  // ör: https://play.google.com/store/apps/details?id=com.washpro.washpro
+
+  const ua = navigator.userAgent;
+  const isIOS = /iPhone|iPad|iPod/.test(ua);
+  const isAndroid = /Android/.test(ua);
+  const target = isIOS ? APP_STORE : isAndroid ? PLAY_STORE : '';
+
+  if (target) {
+    location.replace(target);
+  } else if (APP_STORE || PLAY_STORE) {
+    // Masaustu veya bilinmeyen cihaz: buton goster.
+    const links = document.getElementById('links');
+    links.innerHTML = '';
+    if (APP_STORE) links.innerHTML +=
+      `<a class="btn" href="${APP_STORE}"> App Store'dan indir</a>`;
+    if (PLAY_STORE) links.innerHTML +=
+      `<a class="btn" href="${PLAY_STORE}">▶ Google Play'den indir</a>`;
+  }
+</script>
+</body>
+</html>
