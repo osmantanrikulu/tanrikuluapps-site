@@ -37,6 +37,7 @@
 | `/` | Vitrin — uygulama kartları |
 | `/verified/` | Supabase e-posta doğrulama sonrası "✓ doğrulandı" sayfası (tüm uygulamaların Auth Site URL'i buraya bakar) |
 | `/<uygulama>/get/` | Cihaza göre App Store / Play yönlendirmesi (poster/QR hedefi) |
+| `/t/#<token>` | WashPro müşteri canlı takip sayfası — Supabase `track_job(token)` RPC'sini publishable key ile çağırır (hesapsız/anon); 15 sn'de bir yenilenir |
 
 ### Yeni uygulama eklerken
 1. `index.html`'e kart ekle (mevcut kartları şablon al).

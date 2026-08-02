@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aracını takip et — WashPro</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💧</text></svg>">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+       background:linear-gradient(170deg,#07222c,#0b3a49 60%,#0E7490);min-height:100vh;color:#fff;
+       display:flex;align-items:center;justify-content:center;padding:20px}
+  .card{width:100%;max-width:400px;background:#fff;color:#0f172a;border-radius:24px;padding:28px 24px;
+        box-shadow:0 30px 80px rgba(0,0,0,.4);text-align:center}
+  .brand{font-size:13px;font-weight:800;color:#0E7490;letter-spacing:1px;margin-bottom:16px}
+  .plate{display:inline-flex;border:2px solid #111;border-radius:6px;overflow:hidden;font-weight:800;font-size:20px;margin-bottom:18px}
+  .plate i{background:#003399;color:#fff;font-style:normal;padding:6px 7px;font-size:11px;display:flex;align-items:center}
+  .plate em{font-style:normal;padding:6px 12px;letter-spacing:2px}
+  .big{font-size:22px;font-weight:800;margin:6px 0 2px}
+  .sub{font-size:14px;color:#64748B;line-height:1.5}
+  .steps{display:flex;align-items:center;justify-content:center;margin:22px 0 6px}
+  .dot{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+       font-size:15px;background:#EEF2F6;color:#94A3B8;border:1.5px solid #E2E8F0}
+  .dot.done{background:#D1FAE5;color:#059669;border-color:#059669}
+  .dot.now{background:#0E7490;color:#fff;border-color:#0E7490;box-shadow:0 0 0 5px rgba(14,116,144,.15)}
+  .bar{width:34px;height:2.5px;background:#E2E8F0}
+  .bar.done{background:#059669}
+  .lbl{display:flex;justify-content:center;gap:0;margin-bottom:20px}
+  .lbl span{width:68px;font-size:10px;font-weight:700;color:#94A3B8}
+  .lbl span.on{color:#0E7490}
+  .eta{background:#F2F7F9;border-radius:16px;padding:14px;margin-top:6px}
+  .eta b{display:block;font-size:26px;color:#0E7490}
+  .eta s{text-decoration:none;font-size:11px;color:#64748B;letter-spacing:.6px;font-weight:700}
+  .biz{margin-top:18px;font-size:12px;color:#94A3B8}
+  .err{padding:10px 0}
+  .spin{width:34px;height:34px;border:3px solid #E2E8F0;border-top-color:#0E7490;border-radius:50%;
+        margin:24px auto;animation:r 1s linear infinite}
+  @keyframes r{to{transform:rotate(360deg)}}
+  .foot{margin-top:16px;font-size:11px;color:rgba(255,255,255,.65);text-align:center}
+  .wrap{width:100%;max-width:400px}
+  .foot a{color:#fff;font-weight:700;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card" id="card">
+    <div class="brand">💧 WASHPRO</div>
+    <div class="spin"></div>
+    <div class="sub">Araç bilgisi yükleniyor…</div>
+  </div>
+  <div class="foot">Bu sayfa 15 saniyede bir kendini yeniler ·
+    <a href="/washpro/get/">WashPro'yu indir</a></div>
+</div>
+<script>
+const SUPA = 'https://jlnxyqcjczqtbvviduof.supabase.co';
+const KEY  = 'sb_publishable_h5ZwQrTIoDnBZ6V4YBC0NA_59g2PvOh';
+const token = (location.hash || '').replace('#','').trim();
+const card = document.getElementById('card');
+
+const STEPS = ['queued','washing','ready','delivered'];
+const NAMES = ['Kuyrukta','Yıkanıyor','Hazır','Teslim'];
+
+function fmtTime(iso){
+  if(!iso) return null;
+  const d = new Date(iso);
+  return d.toLocaleTimeString('tr-TR',{hour:'2-digit',minute:'2-digit'});
+}
+
+function render(j){
+  if(!j){ card.innerHTML = `<div class="brand">💧 WASHPRO</div>
+    <div class="err"><div class="big">Kayıt bulunamadı</div>
+    <div class="sub">Kod geçersiz ya da iş henüz buluta yazılmadı.<br>Birazdan otomatik yeniden denenecek.</div></div>`; return; }
+
+  const idx = STEPS.indexOf(j.status);
+  let steps='', lbls='';
+  STEPS.forEach((s,i)=>{
+    const cls = i<idx?'done':(i===idx?'now':'');
+    const icon = i<idx?'✓':(['⏱','🚿','✨','🏁'][i]);
+    if(i>0) steps += `<div class="bar ${i<=idx?'done':''}"></div>`;
+    steps += `<div class="dot ${cls}">${icon}</div>`;
+    lbls  += `<span class="${i===idx?'on':''}">${NAMES[i]}</span>`;
+  });
+
+  let main='', eta='';
+  if(j.status==='queued'){
+    const p = j.queue_position||1;
+    main = `<div class="big">${p}. sıradasınız</div>
+            <div class="sub">Aracınız kuyruğa alındı, sırası gelince yıkamaya başlanacak.</div>`;
+  } else if(j.status==='washing'){
+    main = `<div class="big">Aracınız yıkanıyor 🚿</div>
+            <div class="sub">Şu anda üzerinde çalışılıyor.</div>`;
+  } else if(j.status==='ready'){
+    main = `<div class="big">Aracınız hazır! ✨</div>
+            <div class="sub">Teslim alabilirsiniz${j.ready_at?` · ${fmtTime(j.ready_at)} itibarıyla`:''}.</div>`;
+  } else if(j.status==='delivered'){
+    main = `<div class="big">Teslim edildi 🏁</div>
+            <div class="sub">İyi yolculuklar! Bizi tercih ettiğiniz için teşekkürler.</div>`;
+  } else {
+    main = `<div class="big">İş iptal edildi</div>
+            <div class="sub">Detay için işletmeye danışabilirsiniz.</div>`;
+  }
+
+  const t = fmtTime(j.eta_ready_at);
+  if(t && (j.status==='queued'||j.status==='washing')){
+    eta = `<div class="eta"><s>TAHMİNİ TESLİM</s><b>~${t}</b></div>`;
+  }
+
+  card.innerHTML = `<div class="brand">💧 WASHPRO</div>
+    <div class="plate"><i>TR</i><em>${j.plate}</em></div>
+    <div class="steps">${steps}</div><div class="lbl">${lbls}</div>
+    ${main}${eta}
+    ${j.business?`<div class="biz">${j.business}</div>`:''}`;
+}
+
+async function load(){
+  if(!token){ render(null); return; }
+  try{
+    const r = await fetch(`${SUPA}/rest/v1/rpc/track_job`,{
+      method:'POST',
+      headers:{'Content-Type':'application/json','apikey':KEY,
+               'Authorization':`Bearer ${KEY}`},
+      body: JSON.stringify({token})
+    });
+    render(r.ok ? await r.json() : null);
+  }catch(e){ render(null); }
+}
+load();
+setInterval(load, 15000);
+</script>
+</body>
+</html>
