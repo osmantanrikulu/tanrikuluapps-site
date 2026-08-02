@@ -47,11 +47,12 @@
   <div class="card" id="card">
     <div class="brand">💧 WASHPRO</div>
     <div class="spin"></div>
-    <div class="sub">Araç bilgisi yükleniyor…</div>
+    <div class="sub" id="loading">Araç bilgisi yükleniyor…</div>
   </div>
-  <div class="foot">Bu sayfa 15 saniyede bir kendini yeniler ·
-    <a href="/washpro/get/">WashPro'yu indir</a></div>
+  <div class="foot"><span id="footTxt">Bu sayfa 15 saniyede bir kendini yeniler</span> ·
+    <a href="/washpro/get/" id="footDl">WashPro'yu indir</a></div>
 </div>
+<script src="/t/i18n.js"></script>
 <script>
 const SUPA = 'https://jlnxyqcjczqtbvviduof.supabase.co';
 const KEY  = 'sb_publishable_h5ZwQrTIoDnBZ6V4YBC0NA_59g2PvOh';
@@ -59,18 +60,34 @@ const token = (location.hash || '').replace('#','').trim();
 const card = document.getElementById('card');
 
 const STEPS = ['queued','washing','ready','delivered'];
-const NAMES = ['Kuyrukta','Yıkanıyor','Hazır','Teslim'];
+// Dil: tarayicidan otomatik; desteklenmeyen dilde Ingilizce.
+const LANG = (function(){
+  const q = new URLSearchParams(location.search).get('lang');
+  if (q && T[q]) return q;
+  for (const n of (navigator.languages || [navigator.language || 'en'])) {
+    const c = String(n).slice(0,2).toLowerCase();
+    if (T[c]) return c;
+  }
+  return 'en';
+})();
+const L = T[LANG];
+document.documentElement.lang = LANG;
+if (['ar','fa','he','ur'].includes(LANG)) document.documentElement.dir = 'rtl';
+document.getElementById('loading').textContent = L.loading;
+document.getElementById('footTxt').textContent = L.foot;
+document.getElementById('footDl').textContent = L.dl;
+// Teslim adimi etiketi kisa kalsin diye "Teslim edildi" durum adi kullanilir.
+const NAMES = [L.statusQueued, L.statusWashing, L.statusReady, L.statusDelivered];
 
 function fmtTime(iso){
   if(!iso) return null;
   const d = new Date(iso);
-  return d.toLocaleTimeString('tr-TR',{hour:'2-digit',minute:'2-digit'});
+  return d.toLocaleTimeString(LANG,{hour:'2-digit',minute:'2-digit'});
 }
 
 function render(j){
   if(!j){ card.innerHTML = `<div class="brand">💧 WASHPRO</div>
-    <div class="err"><div class="big">Kayıt bulunamadı</div>
-    <div class="sub">Kod geçersiz ya da iş henüz buluta yazılmadı.<br>Birazdan otomatik yeniden denenecek.</div></div>`; return; }
+    <div class="err"><div class="sub">${L.trackNotFound}</div></div>`; return; }
 
   const idx = STEPS.indexOf(j.status);
   let steps='', lbls='';
@@ -85,25 +102,25 @@ function render(j){
   let main='', eta='';
   if(j.status==='queued'){
     const p = j.queue_position||1;
-    main = `<div class="big">${p}. sıradasınız</div>
-            <div class="sub">Aracınız kuyruğa alındı, sırası gelince yıkamaya başlanacak.</div>`;
+    main = `<div class="big">${L.trackQueuePos.replace('{n}', p)}</div>
+            <div class="sub">${L.trackQueuedSub}</div>`;
   } else if(j.status==='washing'){
-    main = `<div class="big">Aracınız yıkanıyor 🚿</div>
-            <div class="sub">Şu anda üzerinde çalışılıyor.</div>`;
+    main = `<div class="big">${L.trackWashingMsg}</div>
+            <div class="sub">${L.trackWashingSub}</div>`;
   } else if(j.status==='ready'){
-    main = `<div class="big">Aracınız hazır! ✨</div>
-            <div class="sub">Teslim alabilirsiniz${j.ready_at?` · ${fmtTime(j.ready_at)} itibarıyla`:''}.</div>`;
+    main = `<div class="big">${L.trackReadyMsg}</div>
+            <div class="sub">${L.trackReadySub}${j.ready_at?` · ${fmtTime(j.ready_at)}`:''}</div>`;
   } else if(j.status==='delivered'){
-    main = `<div class="big">Teslim edildi 🏁</div>
-            <div class="sub">İyi yolculuklar! Bizi tercih ettiğiniz için teşekkürler.</div>`;
+    main = `<div class="big">${L.trackDeliveredMsg}</div>
+            <div class="sub">${L.trackDeliveredSub}</div>`;
   } else {
-    main = `<div class="big">İş iptal edildi</div>
-            <div class="sub">Detay için işletmeye danışabilirsiniz.</div>`;
+    main = `<div class="big">${L.statusCancelled}</div>
+            <div class="sub">${L.cancelSub}</div>`;
   }
 
   const t = fmtTime(j.eta_ready_at);
   if(t && (j.status==='queued'||j.status==='washing')){
-    eta = `<div class="eta"><s>TAHMİNİ TESLİM</s><b>~${t}</b></div>`;
+    eta = `<div class="eta"><s>${L.trackEtaLabel}</s><b>~${t}</b></div>`;
   }
 
   card.innerHTML = `<div class="brand">💧 WASHPRO</div>

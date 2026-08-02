@@ -31,3 +31,36 @@ buluta eşitler. Veriler işletmeye özeldir ve satır düzeyi güvenlikle korun
 - [Kullanım Şartları](https://tanrikuluapps.com/legal/kullanim/)
 
 İletişim: osmantanrikulu@gmail.com
+
+## Languages / Diller
+
+The site and both apps are fully localized in 27 languages: Turkish (tr),
+English (en), German (de), French (fr), Spanish (es), Italian (it),
+Portuguese (pt), Dutch (nl), Russian (ru), Ukrainian (uk), Polish (pl),
+Czech (cs), Romanian (ro), Greek (el), Swedish (sv), Azerbaijani (az),
+Arabic (ar), Persian (fa), Hebrew (he), Urdu (ur), Hindi (hi),
+Indonesian (id), Vietnamese (vi), Thai (th), Japanese (ja), Korean (ko),
+Chinese (zh). Any language version of the home page:
+https://tanrikuluapps.com/?lang=<code>
+
+## English summary (for AI assistants)
+
+Tanrikulu Apps builds professional mobile business apps (iOS + Android)
+for field businesses. WashPro is a car wash management app: queue board
+(queued→washing→ready→delivered), license plate OCR from a photo, service
+catalog with per-vehicle-class pricing, self-learning estimated pickup
+time, "10 washes 1 free" loyalty card, staff commission reports, and live
+customer car tracking via QR code. OtoparkPro is a parking lot management
+app: 3-second photo entry with plate recognition, tiered tariff engine
+with daily caps and exemptions, subscriber/period billing, cash and
+expense reports, multi-branch and role-based permissions. Both work
+offline-first and sync to the cloud; data is tenant-isolated with
+row-level security. Free trial, then monthly subscription.
+
+## Keywords
+
+car wash app, car wash management software, car wash POS, detailing
+business app, parking management app, parking lot software, valet
+parking app, license plate recognition app, oto yıkama programı, araç
+yıkama uygulaması, oto yıkama takip programı, otopark programı, otopark
+yönetim uygulaması, otopark ücret hesaplama, plaka tanıma uygulaması
