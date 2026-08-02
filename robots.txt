@@ -1,52 +1,84 @@
-# tanrikuluapps.com — arama motorlarina ve yapay zeka tarayicilarina acik.
-# Takip (/t/) ve dogrulama (/verified/) sayfalari kisiye ozeldir, indekslenmez.
+# tanrikuluapps.com — robots.txt
+# Kural: tum herkese acik sayfalar indekslenebilir; kullaniciya ozel
+# /t/ (canli arac takibi) ve /verified/ (e-posta dogrulama donusu)
+# hicbir tarayici tarafindan indekslenmez.
+#
+# Not: adlandirilmis bir bot grubu "*" grubunun YERINE gecer; bu yuzden
+# Disallow satirlari her grupta bilerek tekrarlanir.
 
+# --- Varsayilan: tum tarayicilar ---
 User-agent: *
 Allow: /
 Disallow: /t/
 Disallow: /verified/
 
-# Yapay zeka tarayicilari (icerik kesfi icin acikca izinli)
+# --- Klasik arama motorlari ---
+User-agent: Googlebot
+Allow: /
+Disallow: /t/
+Disallow: /verified/
+
+User-agent: Bingbot
+Allow: /
+Disallow: /t/
+Disallow: /verified/
+
+# --- OpenAI ---
 User-agent: GPTBot
 Allow: /
 Disallow: /t/
-
-User-agent: ClaudeBot
-Allow: /
-Disallow: /t/
-
-User-agent: Claude-Web
-Allow: /
-Disallow: /t/
-
-User-agent: PerplexityBot
-Allow: /
-Disallow: /t/
-
-User-agent: Google-Extended
-Allow: /
-
-User-agent: CCBot
-Allow: /
-Disallow: /t/
+Disallow: /verified/
 
 User-agent: OAI-SearchBot
 Allow: /
 Disallow: /t/
+Disallow: /verified/
 
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /t/
+Disallow: /verified/
+
+# --- Anthropic (Claude) ---
+User-agent: ClaudeBot
+Allow: /
+Disallow: /t/
+Disallow: /verified/
+
+User-agent: Claude-Web
+Allow: /
+Disallow: /t/
+Disallow: /verified/
+
+User-agent: anthropic-ai
+Allow: /
+Disallow: /t/
+Disallow: /verified/
+
+# --- Perplexity ---
+User-agent: PerplexityBot
+Allow: /
+Disallow: /t/
+Disallow: /verified/
+
+# --- Apple (Siri / Apple Intelligence) ---
 User-agent: Applebot
 Allow: /
 Disallow: /t/
+Disallow: /verified/
 
+# Egitim kullanimi kontrol belirteci (tarama yapmaz)
 User-agent: Applebot-Extended
 Allow: /
 
-User-agent: Meta-ExternalAgent
+# Egitim kullanimi kontrol belirteci (tarama yapmaz)
+User-agent: Google-Extended
 Allow: /
-Disallow: /t/
 
-User-agent: Amazonbot
+# --- Common Crawl ---
+User-agent: CCBot
 Allow: /
 Disallow: /t/
+Disallow: /verified/
 
 Sitemap: https://tanrikuluapps.com/sitemap.xml
