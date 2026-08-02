@@ -65,6 +65,14 @@
 - SMTP açıldıktan sonra: Auth → Rate Limits'te saatlik e-posta sınırını
   yükselt; şablonları markala (WashPro'nun TR şablonu örnek alınabilir —
   teal kart, "E-postamı doğrula" düğmesi, TR+EN alt not).
+- **Şablonlar nerede durur:** her uygulama kendi reposunda
+  `docs/eposta-dogrulama-tr.html` + `docs/eposta-kurulum.md` (adım adım
+  kontrol listesi). Yeni uygulamada OtoparkPro'nunkini kopyala, rengi ve
+  adı değiştir. Şablon tablo düzeni + satır içi stille yazılır — e-posta
+  istemcileri modern CSS'i desteklemez. Marka rengi: WashPro teal,
+  OtoparkPro lacivert `#1E3A8A`.
+- **Uygulama 27 dilde ama şablon tek dil:** en azından TR gövde + kısa
+  EN alt not kullan; kullanıcı hangi dilden kaydolursa olsun maili anlar.
 - **Site URL** (Auth → URL Configuration): `https://tanrikuluapps.com/verified`
   — yoksa doğrulama sonrası kullanıcı bozuk localhost sayfası görür.
 
