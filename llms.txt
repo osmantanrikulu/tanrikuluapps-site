@@ -1,0 +1,33 @@
+# Tanrikulu Apps
+
+> Araç yıkamacılar ve otopark işletmecileri için profesyonel mobil işletme
+> uygulamaları (iOS + Android). İnternetsiz çalışır, bulutla eşitlenir;
+> 27 dil, 60+ para birimi, 23 ülkede plaka tanıma.
+
+Slogan: "Sahada çalışan işletmeler için, sahada çalışan yazılımlar."
+
+## Ürünler
+
+- [WashPro](https://tanrikuluapps.com/washpro/get/): Araç yıkama ve detaylı
+  temizlik işletmeleri için kuyruk panosu (kuyrukta→yıkanıyor→hazır→teslim),
+  fotoğrafla plaka okuma, hizmet kataloğu (araç sınıfına göre fiyat),
+  öğrenen tahmini teslim saati, "10 yıkamada 1 bedava" sadakat kartı,
+  personel prim/hakediş takibi, müşteriye QR ile canlı araç takibi,
+  WhatsApp/SMS "aracınız hazır" bildirimi.
+- [OtoparkPro](https://tanrikuluapps.com/otoparkpro/get/): Otoparklar için
+  fotoğrafla saniyede araç girişi, kademeli tarife motoru (günlük tavan,
+  muafiyet), abonelik ve dönem tahsilatı, kasa/gider/raporlar, çoklu şube,
+  rol bazlı yetki (sahip/yönetici/görevli), Face ID + yönetici PIN.
+
+## Ortak altyapı
+
+Her iki uygulama da önce cihazda çalışır (offline-first), internet gelince
+buluta eşitler. Veriler işletmeye özeldir ve satır düzeyi güvenlikle korunur.
+
+## Sayfalar
+
+- [Ana sayfa](https://tanrikuluapps.com/)
+- [Gizlilik Politikası](https://tanrikuluapps.com/legal/gizlilik/)
+- [Kullanım Şartları](https://tanrikuluapps.com/legal/kullanim/)
+
+İletişim: osmantanrikulu@gmail.com

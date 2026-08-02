@@ -1,0 +1,33 @@
+# tanrikuluapps.com — arama motorlarina ve yapay zeka tarayicilarina acik.
+# Takip (/t/) ve dogrulama (/verified/) sayfalari kisiye ozeldir, indekslenmez.
+
+User-agent: *
+Allow: /
+Disallow: /t/
+Disallow: /verified/
+
+# Yapay zeka tarayicilari (icerik kesfi icin acikca izinli)
+User-agent: GPTBot
+Allow: /
+Disallow: /t/
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /t/
+
+User-agent: Claude-Web
+Allow: /
+Disallow: /t/
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /t/
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+Disallow: /t/
+
+Sitemap: https://tanrikuluapps.com/sitemap.xml
