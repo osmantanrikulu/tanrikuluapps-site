@@ -28,6 +28,17 @@
 - Repo: **github.com/osmantanrikulu/tanrikuluapps-site** (public).
 - Barındırma: **Cloudflare Pages**, Git bağlantılı — `main`'e her push
   otomatik yayınlanır (build yok: Framework None, output `/`).
+- **`www` ayrıca eklenmeli.** Pages'e yalnız kök alan adı eklenirse
+  `www.tanrikuluapps.com` HİÇ ÇÖZÜLMEZ ("could not resolve host") —
+  insanlar alışkanlıkla www yazar ve "site kapalı" sanır. Pages →
+  Custom domains → `www...` eklenir (3 Ağu 2026'da yapıldı).
+- **Kanonik adres `tanrikuluapps.com`.** www → kök yönlendirmesi
+  Rules → **Page Rules** ile kuruldu (bu hesapta ayrı "Redirect Rules"
+  maddesi görünmüyor): URL `www.tanrikuluapps.com/*` → Forwarding URL
+  → **301** → `https://tanrikuluapps.com/$1`.
+  `$1` ŞART: olmazsa www ile gelen herkes ana sayfaya düşer, afiş/QR'ın
+  hedeflediği `/otoparkpro/get/` gibi alt sayfalar kaybolur.
+  Doğrulama: `curl -s -o /dev/null -w "%{http_code} -> %{redirect_url}\n" https://www.tanrikuluapps.com/otoparkpro/get/`
 - Proje adı: `tanrikuluapps-site`; custom domain: `tanrikuluapps.com`
   (Active). Yayın kontrolü: `curl -s https://tanrikuluapps.com | head`.
 
