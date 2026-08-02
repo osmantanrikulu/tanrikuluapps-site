@@ -30,4 +30,23 @@ User-agent: CCBot
 Allow: /
 Disallow: /t/
 
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /t/
+
+User-agent: Applebot
+Allow: /
+Disallow: /t/
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+Disallow: /t/
+
+User-agent: Amazonbot
+Allow: /
+Disallow: /t/
+
 Sitemap: https://tanrikuluapps.com/sitemap.xml
