@@ -1,0 +1,13 @@
+{
+  "name": "Tanrikulu Apps",
+  "short_name": "Tanrikulu",
+  "description": "Araç yıkamacılar ve otopark işletmecileri için mobil işletme uygulamaları.",
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ],
+  "theme_color": "#0E7490",
+  "background_color": "#ffffff",
+  "display": "browser",
+  "start_url": "/"
+}

@@ -41,28 +41,47 @@
 <meta property="og:description" content="Araç yıkamacılar ve otopark işletmecileri için mobil yönetim: plakayı okut, kasayı anlık gör, müşterini bekletmeden bilgilendir. İnternetsiz de çalışır.">
 <meta property="og:url" content="https://tanrikuluapps.com/">
 <meta property="og:locale" content="tr_TR">
+<meta property="og:image" content="https://tanrikuluapps.com/icons/icon-512.png">
+<meta property="og:image:width" content="512">
+<meta property="og:image:height" content="512">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Tanrikulu Apps — İşletmen artık cebinde">
 <meta name="twitter:description" content="Araç yıkamacılar ve otoparklar için mobil işletme uygulamaları: WashPro ve OtoparkPro.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💧</text></svg>">
+<meta name="twitter:image" content="https://tanrikuluapps.com/icons/icon-512.png">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" type="image/png" sizes="16x16" href="/icons/icon-16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/icons/icon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-180.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#0E7490">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
+ {"@type":"WebSite","@id":"https://tanrikuluapps.com/#site",
+  "name":"Tanrikulu Apps","url":"https://tanrikuluapps.com/",
+  "publisher":{"@id":"https://tanrikuluapps.com/#org"},
+  "inLanguage":["tr","en","de","fr","es","it","pt","nl","ru","uk","pl","cs","ro","el","sv","az","ar","fa","he","ur","hi","id","vi","th","ja","ko","zh"]},
  {"@type":"Organization","@id":"https://tanrikuluapps.com/#org",
   "name":"Tanrikulu Apps","url":"https://tanrikuluapps.com/",
+  "logo":"https://tanrikuluapps.com/icons/icon-512.png",
   "slogan":"Sahada çalışan işletmeler için, sahada çalışan yazılımlar.",
   "email":"osmantanrikulu@gmail.com",
   "description":"Araç yıkamacılar ve otopark işletmecileri için profesyonel mobil işletme uygulamaları."},
  {"@type":"SoftwareApplication","name":"WashPro",
   "operatingSystem":"iOS, Android","applicationCategory":"BusinessApplication",
   "url":"https://tanrikuluapps.com/washpro/get/",
+  "downloadUrl":"https://tanrikuluapps.com/washpro/get/",
   "publisher":{"@id":"https://tanrikuluapps.com/#org"},
+  "author":{"@id":"https://tanrikuluapps.com/#org"},
   "description":"Araç yıkama işletmeleri için kuyruk panosu, plaka okuma, hizmet kataloğu, tahmini teslim saati, sadakat kartı, personel prim takibi ve QR ile müşteri araç takibi.",
   "inLanguage":["tr", "en", "de", "fr", "es", "it", "pt", "nl", "ru", "uk", "pl", "cs", "ro", "el", "sv", "az", "ar", "fa", "he", "ur", "hi", "id", "vi", "th", "ja", "ko", "zh"],
   "offers":{"@type":"Offer","price":"0","priceCurrency":"USD","description":"Ücretsiz deneme, ardından aylık abonelik"}},
  {"@type":"SoftwareApplication","name":"OtoparkPro",
   "operatingSystem":"iOS, Android","applicationCategory":"BusinessApplication",
   "url":"https://tanrikuluapps.com/otoparkpro/get/",
+  "downloadUrl":"https://tanrikuluapps.com/otoparkpro/get/",
   "publisher":{"@id":"https://tanrikuluapps.com/#org"},
+  "author":{"@id":"https://tanrikuluapps.com/#org"},
   "description":"Otoparklar için fotoğrafla plaka okuma, kademeli tarife, kasa ve raporlar, abonelik takibi, çoklu şube ve rol bazlı yetki.",
   "inLanguage":["tr", "en", "de", "fr", "es", "it", "pt", "nl", "ru", "uk", "pl", "cs", "ro", "el", "sv", "az", "ar", "fa", "he", "ur", "hi", "id", "vi", "th", "ja", "ko", "zh"],
   "offers":{"@type":"Offer","price":"0","priceCurrency":"USD","description":"Ücretsiz deneme, ardından aylık abonelik"}}
@@ -204,6 +223,37 @@
   .gauge .ring i{width:60px;height:60px;border-radius:50%;background:#1E3A8A;display:flex;flex-direction:column;
                  align-items:center;justify-content:center;font-style:normal;font-weight:800;font-size:12px}
   .gauge .ring i s{text-decoration:none;font-size:6.5px;opacity:.7;font-weight:600;letter-spacing:.6px}
+
+  /* ---------- QR canli takip vitrini ---------- */
+  .qrtrack{background:var(--alt);border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);padding:110px 24px}
+  .qr-in{max-width:1040px;margin:0 auto;display:grid;grid-template-columns:1fr .85fr;gap:64px;align-items:center}
+  @media(max-width:860px){.qr-in{grid-template-columns:1fr;gap:44px;text-align:center}
+    .qr-step{text-align:left}.qr-card-wrap{order:-1}}
+  .qr-steps{margin-top:34px;display:grid;gap:18px}
+  .qr-step{display:flex;gap:14px;align-items:flex-start}
+  .qr-step i{flex:none;width:30px;height:30px;border-radius:50%;background:var(--teal);color:#fff;
+             display:flex;align-items:center;justify-content:center;font-style:normal;font-weight:800;font-size:14px}
+  .qr-step b{display:block;font-size:15.5px;font-weight:700;letter-spacing:-.2px}
+  .qr-step span{font-size:13.5px;color:var(--muted);line-height:1.5;display:block;margin-top:2px}
+  .qr-note{margin-top:26px;font-size:13px;color:var(--faint)}
+  .qr-card-wrap{display:flex;justify-content:center}
+  .qr-card{width:min(300px,84vw);background:#fff;border-radius:24px;padding:24px 20px;text-align:center;
+           box-shadow:var(--shadow-card);border:1px solid var(--hair)}
+  .qr-card .qbrand{font-size:11px;font-weight:800;color:var(--teal);letter-spacing:1px;margin-bottom:12px}
+  .qr-card .qplate{display:inline-flex;border:2px solid #111;border-radius:5px;overflow:hidden;font-weight:800;font-size:15px;margin-bottom:14px}
+  .qr-card .qplate i{background:#003399;color:#fff;font-style:normal;padding:4px 5px;font-size:9px;display:flex;align-items:center}
+  .qr-card .qplate em{font-style:normal;padding:4px 9px;letter-spacing:1.5px}
+  .qr-card .qsteps{display:flex;align-items:center;justify-content:center;margin:6px 0 14px}
+  .qr-card .qdot{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+                 font-size:11px;background:#EEF2F6;color:#94A3B8;border:1.5px solid #E2E8F0}
+  .qr-card .qdot.done{background:#D1FAE5;color:#059669;border-color:#059669}
+  .qr-card .qdot.now{background:var(--teal);color:#fff;border-color:var(--teal);box-shadow:0 0 0 4px rgba(14,116,144,.15)}
+  .qr-card .qbar{width:26px;height:2px;background:#E2E8F0}
+  .qr-card .qbar.done{background:#059669}
+  .qr-card .qbig{font-size:18px;font-weight:800;color:#0f172a}
+  .qr-card .qeta{background:#F2F7F9;border-radius:14px;padding:10px;margin-top:12px}
+  .qr-card .qeta b{display:block;font-size:20px;color:var(--teal)}
+  .qr-card .qeta s{text-decoration:none;font-size:9.5px;color:#64748B;letter-spacing:.5px;font-weight:700}
 
   /* ---------- Gelecek / olceklenebilir urun seridi ---------- */
   .future{padding:110px 0;text-align:center}
@@ -404,6 +454,40 @@
   </div>
 </section>
 
+<!-- ================= QR canli takip ================= -->
+<section class="qrtrack" id="canli-takip">
+  <div class="qr-in">
+    <div class="prod-copy rv">
+      <div class="prod-eye" style="color:var(--teal)" data-i18n="qr.eye">📲 Canlı QR takip · Başka uygulamada yok</div>
+      <h2 data-i18n="qr.h2">Müşterin sırasını canlı izlesin.</h2>
+      <p class="lead" style="color:var(--muted)" data-i18n="qr.lead">İş açıldığı anda işe özel bir takip kodu doğar. Müşteri telefon kamerasıyla okutur — uygulama indirmeden, üye olmadan aracını canlı takip eder.</p>
+      <div class="qr-steps">
+        <div class="qr-step"><i>1</i><div><b data-i18n="qr.s1t">İşletme QR'ı gösterir</b>
+          <span data-i18n="qr.s1s">Kayıt açılır açılmaz işe özel QR hazırdır; ister ekrandan okut, ister fişe bas.</span></div></div>
+        <div class="qr-step"><i>2</i><div><b data-i18n="qr.s2t">Müşteri okutur</b>
+          <span data-i18n="qr.s2s">Telefon kamerası yeter — uygulama da üyelik de gerekmez.</span></div></div>
+        <div class="qr-step"><i>3</i><div><b data-i18n="qr.s3t">Canlı izler</b>
+          <span data-i18n="qr.s3s">"2. sıradasınız", durum çizelgesi ve tahmini teslim saati — araç teslim edilene kadar canlı.</span></div></div>
+      </div>
+      <div class="qr-note" data-i18n="qr.note">"Ne zaman hazır olur?" telefonları biter; müşteri kendini bekletilmiş hissetmez.</div>
+    </div>
+    <div class="qr-card-wrap rv">
+      <div class="qr-card" lang="tr">
+        <div class="qbrand">💧 WASHPRO</div>
+        <div class="qplate"><i>TR</i><em>34 ABC 123</em></div>
+        <div class="qsteps">
+          <div class="qdot done">✓</div><div class="qbar done"></div>
+          <div class="qdot now">🚿</div><div class="qbar"></div>
+          <div class="qdot">✨</div><div class="qbar"></div>
+          <div class="qdot">🏁</div>
+        </div>
+        <div class="qbig" data-i18n="qr.demo">Aracınız yıkanıyor 🚿</div>
+        <div class="qeta"><s data-i18n="qr.demoEta">TAHMİNİ TESLİM</s><b>~16:40</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ================= OtoparkPro ================= -->
 <section class="product" id="otoparkpro">
   <div class="prod-in">
@@ -590,6 +674,14 @@
     if (md && d['meta.desc']) md.setAttribute('content', d['meta.desc']);
     document.documentElement.lang = lang;
     document.documentElement.dir = RTL.indexOf(lang) >= 0 ? 'rtl' : 'ltr';
+    // Her dil surumunun kendi canonical adresi (tr = kok).
+    var canon = lang === 'tr'
+      ? 'https://tanrikuluapps.com/'
+      : 'https://tanrikuluapps.com/?lang=' + lang;
+    var lc = document.querySelector('link[rel="canonical"]');
+    if (lc) lc.setAttribute('href', canon);
+    var ogu = document.querySelector('meta[property="og:url"]');
+    if (ogu) ogu.setAttribute('content', canon);
     var sel = document.getElementById('langSel');
     if (sel) sel.value = lang;
   }
