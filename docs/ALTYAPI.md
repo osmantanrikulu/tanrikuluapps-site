@@ -149,3 +149,20 @@
   projesi "Tanrikulu Apps", uygulama başına ayrı iOS client ID).
 - NOT: WashPro Xcode takımı J8628U9N29 (kişisel) → Z4KVC9TB23'e çevrildi (3 Ağu);
   farklı imza nedeniyle cihazda sil+kur gerekti.
+
+## Google Sign-In — tek GCP projesi, uygulama basina iOS client (3 Agu 2026)
+
+- GCP projesi: **Tanrikulu Apps** (`tanrikulu-apps`), Google Auth Platform yapilandirildi
+  (External audience; App name "Tanrikulu Apps").
+- iOS OAuth client ID'leri (GIZLI DEGIL, istemciye gomulur):
+  - WashPro   `260820414956-72gfdned96aq1d945hi06m4eifj55uav.apps.googleusercontent.com`
+  - OtoparkPro `260820414956-55cd3vac5vhmi3hdmc68h2u97i707h6b.apps.googleusercontent.com`
+- iOS'ta Info.plist'e **ters cevrilmis** istemci kimligi URL semasi eklenir:
+  `com.googleusercontent.apps.<client-id-onu>` (yoksa Google ekrani uygulamaya donemez).
+- Uygulama tarafi: `google_sign_in` ^7 + `sign_in_with_apple` ^8 + `crypto`;
+  Supabase'e `signInWithIdToken` ile id token gider (web yonlendirmesi YOK).
+- Supabase Dashboard > Authentication > Providers:
+  - **Apple**: yalnizca "Authorized Client IDs" alanina bundle ID yazilir
+    (native akis; Services ID / secret key GEREKMEZ).
+  - **Google**: "Authorized Client IDs" alanina iOS client ID yazilir;
+    "Skip nonce check" ACIK olmali (google_sign_in nonce gondermez).
