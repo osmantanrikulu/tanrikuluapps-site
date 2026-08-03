@@ -166,3 +166,23 @@
     (native akis; Services ID / secret key GEREKMEZ).
   - **Google**: "Authorized Client IDs" alanina iOS client ID yazilir;
     "Skip nonce check" ACIK olmali (google_sign_in nonce gondermez).
+
+## Android tarafi HENUZ YAPILMADI (3 Agu 2026)
+
+iOS icin yapilanlar Android'i KAPSAMAZ. Android'de Apple/Google girisi ve
+push icin ayrica sunlar gerekir:
+
+- **Google:** GCP projesi "Tanrikulu Apps" altinda uygulama basina bir
+  **Android** OAuth client (paket adi + imza SHA-1 parmak izi; hem debug
+  hem release imzasi icin ayri kayit). Ayrica Supabase Google saglayicisinda
+  "Authorized Client IDs" listesine **Web client ID** de eklenmeli —
+  Android'de `google_sign_in` serverClientId olarak onu kullanir.
+- **Apple:** Android'de native Apple girisi yoktur; web akisi gerekir →
+  Apple Developer'da **Services ID** + **Sign in with Apple key (.p8)** +
+  Supabase Apple saglayicisinda Secret Key alani doldurulmali, Return URL
+  olarak Supabase callback adresi kaydedilmeli.
+- **Push:** Firebase projesi + `google-services.json`; APNs anahtari
+  yalnizca iOS icindir.
+
+Yani su an CANLI olan: iOS Apple girisi + iOS Google girisi + APNs anahtari.
+Android hicbiri icin hazir degil.
