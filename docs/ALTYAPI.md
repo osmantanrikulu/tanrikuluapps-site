@@ -134,3 +134,18 @@
   Gerçek cihazda sorun yok. iOS minimum deployment: 15.5 (ML Kit şartı).
 - İmza: "Apple Development: Osman Tanrikulu", team `J8628U9N29`;
   cihaza kurulum `flutter run --release -d <udid>` ile sorunsuz.
+
+## APNs (Push) — takım geneli tek anahtar (3 Ağu 2026)
+
+- **Team ID:** `Z4KVC9TB23` · **Key ID:** `QL62LG4AY6` · Ad: "WashPro APNs"
+- Environment: Sandbox & Production; kısıtlamasız → **hem WashPro hem OtoparkPro** bu anahtarla push imzalar.
+- `.p8` dosyası Osman'da (tek seferlik indirme). İçeriği ASLA sohbete/repoya yazılmaz;
+  push sunucusu kurulurken doğrudan Supabase Edge Function secrets'a girilir
+  (`supabase secrets set` veya Dashboard > Edge Functions > Secrets).
+- App ID'lerde açık yetkiler: Sign In with Apple + Push Notifications
+  (com.washpro.washpro ve com.otoparkpro.otoparkpro).
+- Karar: push altyapısı KENDİ Edge Function'ımız (OneSignal yok); giriş: Apple native
+  (signInWithIdToken, bundle ID yeter) + Google native (iOS OAuth client, tek GCP
+  projesi "Tanrikulu Apps", uygulama başına ayrı iOS client ID).
+- NOT: WashPro Xcode takımı J8628U9N29 (kişisel) → Z4KVC9TB23'e çevrildi (3 Ağu);
+  farklı imza nedeniyle cihazda sil+kur gerekti.
