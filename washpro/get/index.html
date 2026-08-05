@@ -33,7 +33,6 @@
        padding:15px 20px;border-radius:14px;margin-bottom:12px}
   .muted{font-size:12px;opacity:.6;margin-top:14px}
 </style>
-<script src="/i18n.js" defer></script>
 </head>
 <body>
 <div class="wrap">
@@ -45,6 +44,7 @@
   </div>
   <div class="muted">tanrikuluapps.com</div>
 </div>
+<script src="/i18n.js"></script>
 <script>
 (function(){
   // Ana sayfayla ayni sozlugu kullanir; secim yok, tarayicinin dili
@@ -77,9 +77,10 @@
     document.documentElement.lang = lang;
     document.documentElement.dir = RTL.indexOf(lang) >= 0 ? 'rtl' : 'ltr';
   }
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', apply);
-  } else { apply(); }
+  // i18n.js hemen yukarida SENKRON yuklendi, sozluk kesin hazir.
+  // (Once 'defer' kullanilmisti; sira garantisi olmadigi icin
+  // uygulayici sozluk gelmeden calisip sessizce vazgeciyordu.)
+  apply();
 })();
 </script>
 <script>
