@@ -53,7 +53,10 @@
   // Ana sayfayla ayni sozlugu kullanir; secim yok, tarayicinin dili
   // algilanir (Osman'in karari: 27 dil arasindan sectirmek yerine
   // dogru dilde acilsin). ?lang= ve onceki secim yine gecerli.
-  var SUP = Object.keys(window.I18N || {});
+  // DIKKAT: i18n.js sozlugu `const I18N` ile tanimliyor; ust duzey
+  // const/let window'a YAZILMAZ. `window.I18N` her zaman undefined
+  // doner — ciplak I18N kullanilmali (ana sayfa da oyle yapiyor).
+  var SUP = (typeof I18N === 'undefined') ? [] : Object.keys(I18N);
   var RTL = ['ar','fa','he','ur'];
   function pick(){
     var q = new URLSearchParams(location.search).get('lang');
@@ -68,7 +71,7 @@
     return 'en';
   }
   function apply(){
-    if (!window.I18N) return;             // sozluk yuklenmediyse Turkce kalir
+    if (typeof I18N === 'undefined') return;  // sozluk yoksa Turkce kalir
     var lang = pick();
     var d = I18N[lang] || I18N.en;
     document.querySelectorAll('[data-i18n]').forEach(function(el){
