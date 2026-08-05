@@ -44,8 +44,11 @@
   </div>
   <div class="muted">tanrikuluapps.com</div>
 </div>
-<script src="/i18n.js"></script>
-<script>
+<script src="/i18n.js" data-cfasync="false"></script>
+<!-- data-cfasync: Cloudflare Rocket Loader inline script'leri
+     asenkron calistirip sirayi bozuyor; uygulayici sozlukten
+     once kosunca sayfa Turkce kaliyordu. -->
+<script data-cfasync="false">
 (function(){
   // Ana sayfayla ayni sozlugu kullanir; secim yok, tarayicinin dili
   // algilanir (Osman'in karari: 27 dil arasindan sectirmek yerine
