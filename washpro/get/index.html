@@ -111,8 +111,9 @@
     if (!APP_STORE && !PLAY_STORE) return;
 
     // Masaustu veya bilinmeyen cihaz: buton goster.
-    const dict =
-      (window.I18N && (I18N[document.documentElement.lang] || I18N.en)) || {};
+    const dict = (typeof I18N === 'undefined')
+      ? {}
+      : (I18N[document.documentElement.lang] || I18N.en);
     const links = document.getElementById('links');
     links.innerHTML = '';
     if (APP_STORE) links.innerHTML +=
