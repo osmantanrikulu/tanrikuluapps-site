@@ -186,3 +186,16 @@ push icin ayrica sunlar gerekir:
 
 Yani su an CANLI olan: iOS Apple girisi + iOS Google girisi + APNs anahtari.
 Android hicbiri icin hazir degil.
+
+## Mağaza otomasyonu
+
+Mağaza metinlerini ve ekran görüntülerini 24-27 dilde elle girmek
+uygulama başına yüzlerce kopyala-yapıştır demek. İki mağazanın da API'si
+var; anahtarlar kurulu, araçlar yazılı, tuzaklar belgeli:
+
+→ **[MAGAZA-OTOMASYONU.md](MAGAZA-OTOMASYONU.md)**
+
+Özet: ASC API anahtarı hesap genelinde geçerli (yeni uygulamada
+`--app-id` değiştirmek yeter); Play servis hesabına her yeni uygulama
+için Play Console'dan izin verilmeli. Uygulama KAYDINI hiçbir API
+açamaz, o elle yapılır.
