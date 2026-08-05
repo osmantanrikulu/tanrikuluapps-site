@@ -33,39 +33,87 @@
        padding:15px 20px;border-radius:14px;margin-bottom:12px}
   .muted{font-size:12px;opacity:.6;margin-top:14px}
 </style>
+<script src="/i18n.js" defer></script>
 </head>
 <body>
 <div class="wrap">
   <div class="logo">💧</div>
   <h1>WashPro</h1>
-  <p>Araç yıkama işletmeni cebinden yönet: kuyruk panosu, plaka okuma, sadakat kartı, tahmini teslim saati.</p>
+  <p data-i18n="get.tag">Araç yıkama işletmeni cebinden yönet: kuyruk panosu, plaka okuma, sadakat kartı, tahmini teslim saati.</p>
   <div id="links">
-    <p style="opacity:.9;font-weight:700">Çok yakında App Store ve Google Play'de!</p>
+    <p style="opacity:.9;font-weight:700" data-i18n="get.soon">Çok yakında App Store ve Google Play'de!</p>
   </div>
   <div class="muted">tanrikuluapps.com</div>
 </div>
+<script>
+(function(){
+  // Ana sayfayla ayni sozlugu kullanir; secim yok, tarayicinin dili
+  // algilanir (Osman'in karari: 27 dil arasindan sectirmek yerine
+  // dogru dilde acilsin). ?lang= ve onceki secim yine gecerli.
+  var SUP = Object.keys(window.I18N || {});
+  var RTL = ['ar','fa','he','ur'];
+  function pick(){
+    var q = new URLSearchParams(location.search).get('lang');
+    if (q && SUP.indexOf(q) >= 0) return q;
+    try { var st = localStorage.getItem('lang');
+          if (st && SUP.indexOf(st) >= 0) return st; } catch(e){}
+    var nav = (navigator.languages || [navigator.language || 'en']);
+    for (var i = 0; i < nav.length; i++) {
+      var c = String(nav[i]).slice(0,2).toLowerCase();
+      if (SUP.indexOf(c) >= 0) return c;
+    }
+    return 'en';
+  }
+  function apply(){
+    if (!window.I18N) return;             // sozluk yuklenmediyse Turkce kalir
+    var lang = pick();
+    var d = I18N[lang] || I18N.en;
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var v = d[el.dataset.i18n]; if (v) el.textContent = v;
+    });
+    if (d['get.title']) document.title = d['get.title'];
+    var md = document.querySelector('meta[name="description"]');
+    if (md && d['get.tag']) md.setAttribute('content', d['get.tag']);
+    document.documentElement.lang = lang;
+    document.documentElement.dir = RTL.indexOf(lang) >= 0 ? 'rtl' : 'ltr';
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', apply);
+  } else { apply(); }
+})();
+</script>
 <script>
   // Magaza linkleri yayimlaninca doldurulacak; dolunca cihaza gore
   // otomatik yonlendirir, ikisi de doluysa dogru olanina gider.
   const APP_STORE = '';   // ör: https://apps.apple.com/app/id0000000000
   const PLAY_STORE = '';  // ör: https://play.google.com/store/apps/details?id=com.washpro.washpro
 
-  const ua = navigator.userAgent;
-  const isIOS = /iPhone|iPad|iPod/.test(ua);
-  const isAndroid = /Android/.test(ua);
-  const target = isIOS ? APP_STORE : isAndroid ? PLAY_STORE : '';
+  // DOMContentLoaded bekleniyor: i18n.js "defer" ile yukleniyor ve
+  // sayfa cizilirken henuz calismamis oluyor. Butonlar burada
+  // uretildigi icin metinleri sozlukten alabilmek sart.
+  document.addEventListener('DOMContentLoaded', function () {
+    const ua = navigator.userAgent;
+    const isIOS = /iPhone|iPad|iPod/.test(ua);
+    const isAndroid = /Android/.test(ua);
+    const target = isIOS ? APP_STORE : isAndroid ? PLAY_STORE : '';
 
-  if (target) {
-    location.replace(target);
-  } else if (APP_STORE || PLAY_STORE) {
+    if (target) {
+      location.replace(target);
+      return;
+    }
+    if (!APP_STORE && !PLAY_STORE) return;
+
     // Masaustu veya bilinmeyen cihaz: buton goster.
+    const dict =
+      (window.I18N && (I18N[document.documentElement.lang] || I18N.en)) || {};
     const links = document.getElementById('links');
     links.innerHTML = '';
     if (APP_STORE) links.innerHTML +=
-      `<a class="btn" href="${APP_STORE}"> App Store'dan indir</a>`;
+      `<a class="btn" href="${APP_STORE}"> ${dict['get.ios'] || "App Store'dan indir"}</a>`;
     if (PLAY_STORE) links.innerHTML +=
-      `<a class="btn" href="${PLAY_STORE}">▶ Google Play'den indir</a>`;
-  }
+      `<a class="btn" href="${PLAY_STORE}">▶ ${dict['get.android'] || "Google Play'den indir"}</a>`;
+  });
 </script>
+
 </body>
 </html>
