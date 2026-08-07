@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yeni şifre — OtoparkPro</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="OtoparkPro hesabın için yeni şifre belirle.">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-180.png">
+<meta name="theme-color" content="#1E3A8A">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:#F1F5FB;color:#0F172A;
+       min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+  .card{background:#fff;border-radius:20px;padding:36px 30px;border:1px solid #E0E7F4;max-width:420px;width:100%;
+        box-shadow:0 10px 30px rgba(15,42,110,.10)}
+  .logo{width:56px;height:56px;border-radius:14px;background:#1E3A8A;color:#fff;display:flex;align-items:center;
+        justify-content:center;font-size:30px;font-weight:800;margin:0 auto 16px}
+  h1{font-size:21px;font-weight:800;margin-bottom:6px;text-align:center}
+  p.sub{font-size:14px;color:#64748B;line-height:1.5;text-align:center;margin-bottom:20px}
+  label{display:block;font-size:13px;font-weight:600;color:#334155;margin:12px 0 6px}
+  input{width:100%;padding:13px 14px;border:1.5px solid #CBD5E1;border-radius:12px;font-size:16px}
+  input:focus{outline:none;border-color:#1D4ED8}
+  button{width:100%;margin-top:18px;padding:14px;border:0;border-radius:12px;background:#1D4ED8;color:#fff;
+         font-size:16px;font-weight:700;cursor:pointer}
+  button:disabled{opacity:.5;cursor:default}
+  .msg{margin-top:14px;font-size:14px;line-height:1.5;text-align:center;display:none}
+  .msg.err{color:#B91C1C;display:block}
+  .msg.ok{color:#047857;display:block}
+  .done{text-align:center;display:none}
+  .tick{width:64px;height:64px;border-radius:50%;background:#D1FAE5;display:flex;align-items:center;
+        justify-content:center;font-size:32px;margin:0 auto 14px}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="logo">P</div>
+  <div id="form">
+    <h1 data-i="title"></h1>
+    <p class="sub" data-i="sub"></p>
+    <label for="p1" data-i="l1"></label>
+    <input id="p1" type="password" autocomplete="new-password" minlength="8">
+    <label for="p2" data-i="l2"></label>
+    <input id="p2" type="password" autocomplete="new-password" minlength="8">
+    <button id="go" data-i="btn"></button>
+    <p class="msg" id="msg"></p>
+  </div>
+  <div class="done" id="done">
+    <div class="tick">✓</div>
+    <h1 data-i="doneTitle"></h1>
+    <p class="sub" data-i="doneSub"></p>
+  </div>
+</div>
+<script>
+// OtoparkPro Supabase projesi; anahtar istemciye acik turden
+// (uygulamada da gomulu). Sifre buradan Supabase'e HTTPS ile gider,
+// bu sayfa veya site hicbir sey saklamaz.
+const SUPA = 'https://itjslckrcplrbjurwvtz.supabase.co';
+const KEY  = 'sb_publishable_xBlCzeWSSb2Np9pToL-y7w_9L6SRLLj';
+
+const T = {
+  tr: {title:'Yeni şifre belirle', sub:'OtoparkPro hesabın için yeni bir şifre seç.',
+       l1:'Yeni şifre (en az 8 karakter)', l2:'Yeni şifre (tekrar)', btn:'Şifreyi Kaydet',
+       mismatch:'Şifreler birbirini tutmuyor.', short:'Şifre en az 8 karakter olmalı.',
+       expired:'Bağlantının süresi dolmuş ya da daha önce kullanılmış. Uygulamadan yeni bir şifre sıfırlama bağlantısı iste.',
+       fail:'Şifre kaydedilemedi: ', doneTitle:'Şifren güncellendi',
+       doneSub:'Uygulamaya dönüp yeni şifrenle giriş yapabilirsin.'},
+  en: {title:'Set a new password', sub:'Choose a new password for your OtoparkPro account.',
+       l1:'New password (min 8 characters)', l2:'New password (repeat)', btn:'Save Password',
+       mismatch:'Passwords do not match.', short:'Password must be at least 8 characters.',
+       expired:'This link has expired or was already used. Request a new reset link from the app.',
+       fail:'Could not save the password: ', doneTitle:'Password updated',
+       doneSub:'Return to the app and sign in with your new password.'},
+};
+const q = new URLSearchParams(location.search);
+const lang = (q.get('lang') || navigator.language || 'en').slice(0,2);
+const L = T[lang] || T.en;
+document.documentElement.lang = T[lang] ? lang : 'en';
+document.querySelectorAll('[data-i]').forEach(
+    el => { el.textContent = L[el.getAttribute('data-i')] ?? el.textContent; });
+
+// Supabase dogrulama ucundan #access_token=...&type=recovery ile gelinir.
+const frag = new URLSearchParams((location.hash || '').replace(/^#/, ''));
+const access = frag.get('access_token');
+const msg = document.getElementById('msg');
+if (!access) { msg.className = 'msg err'; msg.textContent = L.expired; document.getElementById('go').disabled = true; }
+
+document.getElementById('go').addEventListener('click', async () => {
+  const p1 = document.getElementById('p1').value;
+  const p2 = document.getElementById('p2').value;
+  msg.className = 'msg'; msg.textContent = '';
+  if (p1.length < 8) { msg.className='msg err'; msg.textContent = L.short; return; }
+  if (p1 !== p2) { msg.className='msg err'; msg.textContent = L.mismatch; return; }
+  const b = document.getElementById('go'); b.disabled = true;
+  try {
+    const r = await fetch(SUPA + '/auth/v1/user', {
+      method: 'PUT',
+      headers: {'apikey': KEY, 'Authorization': 'Bearer ' + access,
+                'Content-Type': 'application/json'},
+      body: JSON.stringify({password: p1}),
+    });
+    if (!r.ok) {
+      const e = await r.json().catch(() => ({}));
+      const m = (e.msg || e.message || e.error_description || ('HTTP ' + r.status));
+      msg.className='msg err';
+      msg.textContent = /expired|invalid|jwt/i.test(m) ? L.expired : (L.fail + m);
+      b.disabled = false; return;
+    }
+    document.getElementById('form').style.display = 'none';
+    document.getElementById('done').style.display = 'block';
+  } catch (e) {
+    msg.className='msg err'; msg.textContent = L.fail + e; b.disabled = false;
+  }
+});
+</script>
+</body>
+</html>
