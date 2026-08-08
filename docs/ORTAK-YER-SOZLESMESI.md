@@ -98,7 +98,8 @@ ekranına `type=parking` gri ikincil pin katmanı (WashPro görev #45,
   ('exterior', 'interiorExterior'…) — gösterilecekse çevrilmeli ya da
   ham bırakılmalı; WashPro içi çeviri tablosu `serviceName()` (Dart).
 
-**OtoparkPro (HAZIR — migration 0013, Osman uygulayınca canlı):**
+**OtoparkPro (CANLI — 0013 uygulandı, 8 Ağu gece anon REST'ten doğrulandı;
+örnek dönüş: Tanrıkulu Otopark/Merkez, busy=6, capacity=40, tarife dolu):**
 - Proje: `https://itjslckrcplrbjurwvtz.supabase.co`
 - Anahtar (publishable): `sb_publishable_xBlCzeWSSb2Np9pToL-y7w_9L6SRLLj`
 - Erişim: RPC — `POST /rest/v1/rpc/public_places_v1` gövde
