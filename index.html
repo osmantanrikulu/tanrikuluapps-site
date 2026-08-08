@@ -301,6 +301,30 @@
   .qr-card .qeta b{display:block;font-size:20px;color:var(--teal)}
   .qr-card .qeta s{text-decoration:none;font-size:9.5px;color:#64748B;letter-spacing:.5px;font-weight:700}
 
+  /* ---------- OtoparkPro vitrin/makbuz varyantlari (navy palet) ---------- */
+  .opk .qr-step i{background:#1D4ED8}
+  .opk .prod-eye{color:#1D4ED8}
+  .opk .qr-card .qbrand{color:#1D4ED8}
+  .opk .qr-card .qeta b{color:#1D4ED8}
+  .tv-mock.ptv{background:linear-gradient(160deg,#0B1738,#1E3A8A);display:flex;flex-direction:column;gap:8px}
+  .ptv .tvh s{color:#FBBF24;font-size:12px;letter-spacing:.5px}
+  .ptvb{flex:1;display:grid;grid-template-columns:1.1fr 1fr;gap:8px}
+  .ptv-free{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.09);border-radius:10px;
+            display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
+  .ptv-free s{text-decoration:none;font-size:8px;font-weight:800;letter-spacing:2px;color:#93C5FD}
+  .ptv-free b{font-size:44px;font-weight:800;color:#fff;line-height:1}
+  .ptv-free u{text-decoration:none;font-size:8px;color:#94A3B8}
+  .ptv-tar{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.09);border-radius:10px;padding:8px 10px;
+           display:flex;flex-direction:column;justify-content:center;gap:4px}
+  .ptv-tar h4{font-size:7.5px;font-weight:800;letter-spacing:2px;color:#93C5FD;margin-bottom:2px}
+  .ptv-tar div{display:flex;justify-content:space-between;font-size:8.5px;color:#E2E8F0;
+               border-bottom:1px solid rgba(255,255,255,.1);padding-bottom:3px}
+  .ptv-tar div:last-child{border-bottom:0;padding-bottom:0}
+  .ptv-tar b{color:#fff}
+  .ptv-foot{display:flex;justify-content:space-between;align-items:center;font-size:7px;color:#64748B}
+  .ptv-foot i{width:16px;height:16px;border-radius:3px;background:#fff;font-style:normal;font-size:9px;
+              display:flex;align-items:center;justify-content:center}
+
   /* ---------- Gelecek / olceklenebilir urun seridi ---------- */
   .future{padding:110px 0;text-align:center}
   .future-grid{margin-top:52px;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
@@ -574,6 +598,9 @@
           <span data-i18n="tv.s3s">Kuyrukta → İşlemde → Hazır sütunları canlı akar; teslim edilen listeden düşer.</span></div></div>
       </div>
       <div class="qr-note" data-i18n="tv.note">Kurulum tek seferlik: TV kalıcı olarak işletmenin ekranı olur.</div>
+      <div class="pill-row" style="margin-top:18px">
+        <a class="btn btn-main" href="/washpro/pano/">tanrikuluapps.com/washpro/pano →</a>
+      </div>
     </div>
   </div>
 </section>
@@ -646,10 +673,82 @@
           <div><b data-i18n="op.b6t">Vitrin panosu: boş yer camda yazsın</b>
           <span data-i18n="op.b6s">Kulübedeki TV canlı boş yer sayısını ve tarifeni gösterir; yoldan geçen sürücü doluluğu görüp girer. Kurulum: TV'de tek adres + uygulamadan tek kod.</span></div>
         </div>
+        <div class="benefit">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+          <div><b data-i18n="op.b7t">Plakayı ara, müşteriyi tanı</b>
+          <span data-i18n="op.b7s">"Şu plaka içeride mi?" bir dokunuş; geçmiş ziyaretler kayıtta: kaç kez gelmiş, en son ne zaman.</span></div>
+        </div>
       </div>
       <div class="pill-row">
         <a class="btn btn-main" href="/otoparkpro/get/" data-i18n="dl.park2">OtoparkPro'yu İndir</a>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= OtoparkPro vitrin panosu ================= -->
+<section class="tvsec opk" id="otopark-pano">
+  <div class="tv-in">
+    <div class="prod-copy rv">
+      <div class="prod-eye" data-i18n="optv.eye">📺 Vitrin Panosu · Kulübedeki TV</div>
+      <h2 data-i18n="optv.h2">Boş yer sayısı camdan okunsun.</h2>
+      <p class="lead" style="color:var(--muted)" data-i18n="optv.lead">Kulübedeki televizyon canlı boş yer sayısını, doluluğu ve tarifeni gösterir; işletmenin adı panonun tepesinde parlar. Yoldan geçen sürücü yer olduğunu görür ve girer.</p>
+      <div class="qr-steps">
+        <div class="qr-step"><i>1</i><div><b data-i18n="optv.s1t">TV'de adresi aç</b>
+          <span data-i18n="optv.s1s">Televizyonun tarayıcısına tanrikuluapps.com/otoparkpro/pano yaz; ekranda 6 haneli eşleştirme kodu belirir.</span></div></div>
+        <div class="qr-step"><i>2</i><div><b data-i18n="optv.s2t">Uygulamadan bağla</b>
+          <span data-i18n="optv.s2s">Ayarlar → Vitrin Panosu'na kodu yaz — TV saniyeler içinde senin panona dönüşür.</span></div></div>
+        <div class="qr-step"><i>3</i><div><b data-i18n="optv.s3t">Pano kendini günceller</b>
+          <span data-i18n="optv.s3s">Her giriş-çıkışta boş yer sayısı değişir; tarifeyi değiştirirsen pano da değişir. Dokunmak gerekmez.</span></div></div>
+      </div>
+      <div class="qr-note" data-i18n="optv.note">Kurulum tek seferlik: TV kalıcı olarak otoparkın vitrini olur.</div>
+      <div class="pill-row" style="margin-top:18px">
+        <a class="btn" style="background:#1D4ED8;color:#fff" href="/otoparkpro/pano/" target="_blank" rel="noopener" data-i18n="optv.try">Panoyu tarayıcıda dene →</a>
+      </div>
+    </div>
+    <div class="tv-mock-wrap rv">
+      <div class="tv-mock ptv" lang="tr" aria-hidden="true">
+        <div class="tvh"><s>YILDIZ OTOPARK</s><b>15:42</b></div>
+        <div class="ptvb">
+          <div class="ptv-free"><s>BOŞ YER</s><b>16</b><u>34 / 50</u></div>
+          <div class="ptv-tar">
+            <h4>TARİFE</h4>
+            <div><span>1 saate kadar</span><b>₺50</b></div>
+            <div><span>3 saate kadar</span><b>₺100</b></div>
+            <div><span>Günlük tavan</span><b>₺300</b></div>
+          </div>
+        </div>
+        <div class="ptv-foot"><span>OtoparkPro</span><i>▦</i></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= OtoparkPro makbuz QR ================= -->
+<section class="qrtrack opk" id="makbuz-qr">
+  <div class="qr-in">
+    <div class="qr-card-wrap rv">
+      <div class="qr-card" lang="tr">
+        <div class="qbrand">🅿️ OTOPARKPRO</div>
+        <div class="qplate"><i>TR</i><em>34 ABC 123</em></div>
+        <div class="qbig" data-i18n="opqr.demo">Aracınız içeride 🅿️</div>
+        <div class="qeta"><s data-i18n="opqr.demoIn">GİRİŞ</s><b>09:12</b></div>
+        <div class="qeta"><s data-i18n="opqr.demoFee">İŞLEYEN ÜCRET</s><b>₺120</b></div>
+      </div>
+    </div>
+    <div class="prod-copy rv">
+      <div class="prod-eye" data-i18n="opqr.eye">📲 Makbuz QR'ı · Pazarlığı bitiren fiş</div>
+      <h2 data-i18n="opqr.h2">Müşterin ücreti canlı görsün.</h2>
+      <p class="lead" style="color:var(--muted)" data-i18n="opqr.lead">Araç girer girmez kayda özel bir karekod doğar. Müşteri okutur; giriş saatini ve işleyen ücreti telefonunda canlı izler. Çıkış kuyruğunda "bu kadar tutmaz" tartışması biter.</p>
+      <div class="qr-steps">
+        <div class="qr-step"><i>1</i><div><b data-i18n="opqr.s1t">Girişte QR'ı göster</b>
+          <span data-i18n="opqr.s1s">Kayıt detayındaki Makbuz QR'ı ekrandan okutulur; istersen fişe bas.</span></div></div>
+        <div class="qr-step"><i>2</i><div><b data-i18n="opqr.s2t">Müşteri okutur</b>
+          <span data-i18n="opqr.s2s">Telefon kamerası yeter — uygulama da üyelik de gerekmez.</span></div></div>
+        <div class="qr-step"><i>3</i><div><b data-i18n="opqr.s3t">Ücret canlı işler</b>
+          <span data-i18n="opqr.s3s">Giriş saati, süre ve senin tarifenle hesaplanan tutar — araç çıkana kadar canlı.</span></div></div>
+      </div>
+      <div class="qr-note" data-i18n="opqr.note">Bağlantı yalnız o tek kaydı gösterir; plakaların ve kasan asla dışarı açılmaz.</div>
     </div>
   </div>
 </section>
