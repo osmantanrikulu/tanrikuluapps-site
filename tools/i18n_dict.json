@@ -96,7 +96,9 @@
   "wp.b5t": "تنتهي خلافات العمولة",
   "wp.eye": "💧 WashPro · لمغاسل السيارات",
   "wp.h2": "المدير في جيب الغسّال.",
-  "wp.lead": "كل سيارة من الطابور إلى التسليم على لوحة واحدة. اعمل أنت، وليتابع WashPro."
+  "wp.lead": "كل سيارة من الطابور إلى التسليم على لوحة واحدة. اعمل أنت، وليتابع WashPro.",
+  "op.b6t": "لوحة الواجهة: الأماكن الشاغرة في الواجهة",
+  "op.b6s": "تلفاز الكشك يعرض مباشرة عدد الأماكن الشاغرة وتعرفتك؛ يراها السائق المار فيدخل. التركيب: عنوان واحد على التلفاز + رمز واحد من التطبيق."
  },
  "az": {
   "dl.park": "🅿️ OtoparkPro-nu yüklə",
@@ -195,7 +197,9 @@
   "wp.b5t": "Faiz mübahisəsi bitsin",
   "wp.eye": "💧 WashPro · Avtoyuma biznesləri üçün",
   "wp.h2": "Yuyucunun cibindəki müdir.",
-  "wp.lead": "Növbədən təhvilə hər avtomobil tək lövhədə. Sən işinlə məşğul ol, izləməni WashPro etsin."
+  "wp.lead": "Növbədən təhvilə hər avtomobil tək lövhədə. Sən işinlə məşğul ol, izləməni WashPro etsin.",
+  "op.b6t": "Vitrin lövhəsi: boş yer vitrində",
+  "op.b6s": "Köşk TV-si boş yerləri və tarifini canlı göstərir; yoldan keçən sürücü görüb girir. Quraşdırma: TV-də bir ünvan + tətbiqdən bir kod."
  },
  "cs": {
   "dl.park": "🅿️ Stáhnout OtoparkPro",
@@ -294,7 +298,9 @@
   "wp.b5t": "Konec sporů o provize",
   "wp.eye": "💧 WashPro · Pro automyčky",
   "wp.h2": "Šéf v kapse myče.",
-  "wp.lead": "Každé auto od fronty po předání na jedné nástěnce. Vy pracujete, WashPro hlídá."
+  "wp.lead": "Každé auto od fronty po předání na jedné nástěnce. Vy pracujete, WashPro hlídá.",
+  "op.b6t": "Výlohová tabule: volná místa ve výloze",
+  "op.b6s": "TV v budce živě ukazuje volná místa a tvůj ceník; projíždějící řidiči vidí a zajedou. Zprovoznění: jedna URL na TV + jeden kód z aplikace."
  },
  "de": {
   "dl.park": "🅿️ OtoparkPro laden",
@@ -393,7 +399,9 @@
   "wp.b5t": "Schluss mit Provisionsstreit",
   "wp.eye": "💧 WashPro · Für Autowäschereien",
   "wp.h2": "Der Chef in der Tasche des Wäschers.",
-  "wp.lead": "Jedes Auto von der Warteschlange bis zur Übergabe auf einem Board. Du machst die Arbeit, WashPro das Tracking."
+  "wp.lead": "Jedes Auto von der Warteschlange bis zur Übergabe auf einem Board. Du machst die Arbeit, WashPro das Tracking.",
+  "op.b6t": "Anzeigetafel: freie Plätze im Schaufenster",
+  "op.b6s": "Der Kassen-TV zeigt live freie Plätze und deine Tarife; vorbeifahrende Fahrer sehen die Verfügbarkeit. Einrichtung: eine URL am TV + ein Code aus der App."
  },
  "el": {
   "dl.park": "🅿️ Κατέβασε το OtoparkPro",
@@ -492,7 +500,9 @@
   "wp.b5t": "Τέλος οι καβγάδες για ποσοστά",
   "wp.eye": "💧 WashPro · Για πλυντήρια αυτοκινήτων",
   "wp.h2": "Το αφεντικό στην τσέπη του πλύντη.",
-  "wp.lead": "Κάθε αυτοκίνητο, από την ουρά ως την παράδοση, σε έναν πίνακα. Εσύ δούλευε, το WashPro παρακολουθεί."
+  "wp.lead": "Κάθε αυτοκίνητο, από την ουρά ως την παράδοση, σε έναν πίνακα. Εσύ δούλευε, το WashPro παρακολουθεί.",
+  "op.b6t": "Πίνακας βιτρίνας: οι ελεύθερες θέσεις στη βιτρίνα",
+  "op.b6s": "Η TV του φυλακίου δείχνει ζωντανά τις ελεύθερες θέσεις και τις τιμές σου· οι διερχόμενοι οδηγοί μπαίνουν. Εγκατάσταση: ένα URL στην TV + ένας κωδικός από την εφαρμογή."
  },
  "en": {
   "dl.park": "🅿️ Download OtoparkPro",
@@ -591,7 +601,9 @@
   "wp.b5t": "End commission disputes",
   "wp.eye": "💧 WashPro · For car wash businesses",
   "wp.h2": "The boss in the washer's pocket.",
-  "wp.lead": "Every car from queue to delivery on one board. You do the work, WashPro does the tracking."
+  "wp.lead": "Every car from queue to delivery on one board. You do the work, WashPro does the tracking.",
+  "op.b6t": "Display board: free spots in the window",
+  "op.b6s": "The booth TV shows live free-spot count and your rates; passing drivers see availability and pull in. Setup: one URL on the TV + one code from the app."
  },
  "es": {
   "dl.park": "🅿️ Descargar OtoparkPro",
@@ -690,7 +702,9 @@
   "wp.b5t": "Fin de las disputas por comisiones",
   "wp.eye": "💧 WashPro · Para lavaderos de coches",
   "wp.h2": "El jefe en el bolsillo del lavador.",
-  "wp.lead": "Cada coche, de la cola a la entrega, en un solo panel. Tú a lo tuyo; WashPro lleva el seguimiento."
+  "wp.lead": "Cada coche, de la cola a la entrega, en un solo panel. Tú a lo tuyo; WashPro lleva el seguimiento.",
+  "op.b6t": "Panel de escaparate: plazas libres a la vista",
+  "op.b6s": "La TV de la caseta muestra en vivo las plazas libres y tus tarifas; el conductor que pasa entra. Instalación: una URL en la TV + un código de la app."
  },
  "fa": {
   "dl.park": "🅿️ دانلود OtoparkPro",
@@ -789,7 +803,9 @@
   "wp.b5t": "بحث کمیسیون تمام می‌شود",
   "wp.eye": "💧 WashPro · برای کارواش‌ها",
   "wp.h2": "رئیس در جیب کارواش‌چی.",
-  "wp.lead": "هر خودرو از صف تا تحویل روی یک تابلو. تو به کارت برس، پیگیری با WashPro."
+  "wp.lead": "هر خودرو از صف تا تحویل روی یک تابلو. تو به کارت برس، پیگیری با WashPro.",
+  "op.b6t": "تابلوی ویترین: جای خالی در ویترین",
+  "op.b6s": "تلویزیون اتاقک تعداد جای خالی و تعرفه‌ات را زنده نشان می‌دهد؛ راننده عبوری می‌بیند و می‌آید. راه‌اندازی: یک نشانی روی تلویزیون + یک کد از برنامه."
  },
  "fr": {
   "dl.park": "🅿️ Télécharger OtoparkPro",
@@ -888,7 +904,9 @@
   "wp.b5t": "Fin des disputes de commission",
   "wp.eye": "💧 WashPro · Pour les stations de lavage",
   "wp.h2": "Le patron dans la poche du laveur.",
-  "wp.lead": "Chaque voiture, de la file à la remise, sur un seul tableau. Faites votre travail, WashPro fait le suivi."
+  "wp.lead": "Chaque voiture, de la file à la remise, sur un seul tableau. Faites votre travail, WashPro fait le suivi.",
+  "op.b6t": "Écran vitrine : les places libres s'affichent",
+  "op.b6s": "La TV de la guérite montre en direct les places libres et vos tarifs ; les conducteurs qui passent entrent. Installation : une URL sur la TV + un code de l'appli."
  },
  "he": {
   "dl.park": "🅿️ הורד את OtoparkPro",
@@ -987,7 +1005,9 @@
   "wp.b5t": "סוף לוויכוחי עמלות",
   "wp.eye": "💧 WashPro · לשטיפות רכב",
   "wp.h2": "הבוס שבכיס של השוטף.",
-  "wp.lead": "כל רכב מהתור ועד המסירה בלוח אחד. אתה עובד, WashPro עוקב."
+  "wp.lead": "כל רכב מהתור ועד המסירה בלוח אחד. אתה עובד, WashPro עוקב.",
+  "op.b6t": "לוח חלון ראווה: המקומות הפנויים בחלון",
+  "op.b6s": "הטלוויזיה בביתן מציגה בשידור חי מקומות פנויים ותעריפים; נהגים חולפים רואים ונכנסים. התקנה: כתובת אחת בטלוויזיה + קוד אחד מהאפליקציה."
  },
  "hi": {
   "dl.park": "🅿️ OtoparkPro डाउनलोड करें",
@@ -1086,7 +1106,9 @@
   "wp.b5t": "कमीशन का झगड़ा ख़त्म",
   "wp.eye": "💧 WashPro · कार वॉश कारोबारों के लिए",
   "wp.h2": "धुलाई वाले की जेब में बॉस।",
-  "wp.lead": "लाइन से डिलीवरी तक हर गाड़ी एक बोर्ड पर। आप काम कीजिए, ट्रैकिंग WashPro करे।"
+  "wp.lead": "लाइन से डिलीवरी तक हर गाड़ी एक बोर्ड पर। आप काम कीजिए, ट्रैकिंग WashPro करे।",
+  "op.b6t": "डिस्प्ले बोर्ड: खाली जगह सामने",
+  "op.b6s": "केबिन का टीवी लाइव खाली जगह और दरें दिखाता है; गुज़रता ड्राइवर देखकर अंदर आता है। सेटअप: टीवी पर एक पता + ऐप से एक कोड।"
  },
  "id": {
   "dl.park": "🅿️ Unduh OtoparkPro",
@@ -1185,7 +1207,9 @@
   "wp.b5t": "Perdebatan komisi selesai",
   "wp.eye": "💧 WashPro · Untuk bisnis cuci mobil",
   "wp.h2": "Bos di saku pencuci.",
-  "wp.lead": "Setiap mobil dari antrean hingga serah terima di satu papan. Kamu bekerja, WashPro yang memantau."
+  "wp.lead": "Setiap mobil dari antrean hingga serah terima di satu papan. Kamu bekerja, WashPro yang memantau.",
+  "op.b6t": "Papan etalase: slot kosong terpampang",
+  "op.b6s": "TV pos menampilkan slot kosong dan tarif secara langsung; pengemudi yang lewat melihat lalu masuk. Pemasangan: satu URL di TV + satu kode dari aplikasi."
  },
  "it": {
   "dl.park": "🅿️ Scarica OtoparkPro",
@@ -1284,7 +1308,9 @@
   "wp.b5t": "Fine delle liti sulle provvigioni",
   "wp.eye": "💧 WashPro · Per gli autolavaggi",
   "wp.h2": "Il capo nella tasca del lavaggista.",
-  "wp.lead": "Ogni auto, dalla coda alla consegna, su un'unica bacheca. Tu lavora, WashPro tiene il conto."
+  "wp.lead": "Ogni auto, dalla coda alla consegna, su un'unica bacheca. Tu lavora, WashPro tiene il conto.",
+  "op.b6t": "Pannello vetrina: posti liberi in vista",
+  "op.b6s": "La TV del gabbiotto mostra in diretta i posti liberi e le tue tariffe; chi passa vede ed entra. Configurazione: un URL sulla TV + un codice dall'app."
  },
  "ja": {
   "dl.park": "🅿️ OtoparkProをダウンロード",
@@ -1383,7 +1409,9 @@
   "wp.b5t": "歩合の揉め事をなくす",
   "wp.eye": "💧 WashPro · 洗車ビジネス向け",
   "wp.h2": "洗車員のポケットにいるボス。",
-  "wp.lead": "列から引き渡しまで、すべての車を1つのボードで。あなたは仕事に、追跡はWashProに。"
+  "wp.lead": "列から引き渡しまで、すべての車を1つのボードで。あなたは仕事に、追跡はWashProに。",
+  "op.b6t": "ウィンドウボード:空き状況を窓に",
+  "op.b6s": "ブースのTVが空き台数と料金をライブ表示。通行中のドライバーが見て入庫します。設定はTVでURLを開き、アプリのコードで連携するだけ。"
  },
  "ko": {
   "dl.park": "🅿️ OtoparkPro 다운로드",
@@ -1482,7 +1510,9 @@
   "wp.b5t": "수수료 다툼 끝",
   "wp.eye": "💧 WashPro · 세차 비즈니스용",
   "wp.h2": "세차원 주머니 속의 사장님.",
-  "wp.lead": "대기부터 인도까지 모든 차량이 한 보드에. 일은 당신이, 추적은 WashPro가."
+  "wp.lead": "대기부터 인도까지 모든 차량이 한 보드에. 일은 당신이, 추적은 WashPro가.",
+  "op.b6t": "쇼윈도 보드: 빈자리를 창에",
+  "op.b6s": "부스 TV가 빈자리 수와 요금을 실시간 표시합니다. 지나가던 운전자가 보고 들어옵니다. 설정: TV에 주소 하나 + 앱에서 코드 하나."
  },
  "nl": {
   "dl.park": "🅿️ OtoparkPro downloaden",
@@ -1581,7 +1611,9 @@
   "wp.b5t": "Einde aan provisiediscussies",
   "wp.eye": "💧 WashPro · Voor autowasbedrijven",
   "wp.h2": "De baas in de zak van de wasser.",
-  "wp.lead": "Elke auto van rij tot aflevering op één bord. Jij doet het werk, WashPro houdt bij."
+  "wp.lead": "Elke auto van rij tot aflevering op één bord. Jij doet het werk, WashPro houdt bij.",
+  "op.b6t": "Etalagebord: vrije plekken in de etalage",
+  "op.b6s": "De tv in het wachthuisje toont live vrije plekken en je tarieven; passerende bestuurders rijden binnen. Installatie: één URL op de tv + één code uit de app."
  },
  "pl": {
   "dl.park": "🅿️ Pobierz OtoparkPro",
@@ -1680,7 +1712,9 @@
   "wp.b5t": "Koniec sporów o prowizje",
   "wp.eye": "💧 WashPro · Dla myjni samochodowych",
   "wp.h2": "Szef w kieszeni myjącego.",
-  "wp.lead": "Każde auto od kolejki po wydanie na jednej tablicy. Ty pracujesz, WashPro pilnuje."
+  "wp.lead": "Każde auto od kolejki po wydanie na jednej tablicy. Ty pracujesz, WashPro pilnuje.",
+  "op.b6t": "Tablica witrynowa: wolne miejsca w oknie",
+  "op.b6s": "TV w budce pokazuje na żywo wolne miejsca i cennik; przejeżdżający kierowcy widzą i wjeżdżają. Instalacja: jeden adres na TV + jeden kod z aplikacji."
  },
  "pt": {
   "dl.park": "🅿️ Baixar o OtoparkPro",
@@ -1779,7 +1813,9 @@
   "wp.b5t": "Fim da briga por comissão",
   "wp.eye": "💧 WashPro · Para lava-rápidos",
   "wp.h2": "O chefe no bolso do lavador.",
-  "wp.lead": "Cada carro, da fila à entrega, em um único painel. Você trabalha, o WashPro acompanha."
+  "wp.lead": "Cada carro, da fila à entrega, em um único painel. Você trabalha, o WashPro acompanha.",
+  "op.b6t": "Painel de montra: lugares livres à vista",
+  "op.b6s": "A TV da guarita mostra em direto os lugares livres e as tuas tarifas; quem passa vê e entra. Instalação: um URL na TV + um código da app."
  },
  "ro": {
   "dl.park": "🅿️ Descarcă OtoparkPro",
@@ -1878,7 +1914,9 @@
   "wp.b5t": "Gata cu disputele pe comision",
   "wp.eye": "💧 WashPro · Pentru spălătorii auto",
   "wp.h2": "Șeful din buzunarul spălătorului.",
-  "wp.lead": "Fiecare mașină, de la coadă la predare, pe un singur panou. Tu lucrezi, WashPro ține evidența."
+  "wp.lead": "Fiecare mașină, de la coadă la predare, pe un singur panou. Tu lucrezi, WashPro ține evidența.",
+  "op.b6t": "Panou vitrină: locurile libere la vedere",
+  "op.b6s": "TV-ul cabinei arată live locurile libere și tarifele tale; șoferii care trec văd și intră. Instalare: un URL pe TV + un cod din aplicație."
  },
  "ru": {
   "dl.park": "🅿️ Скачать OtoparkPro",
@@ -1977,7 +2015,9 @@
   "wp.b5t": "Конец спорам о процентах",
   "wp.eye": "💧 WashPro · Для автомоек",
   "wp.h2": "Начальник в кармане мойщика.",
-  "wp.lead": "Каждая машина от очереди до выдачи — на одной доске. Вы работаете, WashPro ведёт учёт."
+  "wp.lead": "Каждая машина от очереди до выдачи — на одной доске. Вы работаете, WashPro ведёт учёт.",
+  "op.b6t": "Витринное табло: свободные места на виду",
+  "op.b6s": "ТВ в будке показывает свободные места и тарифы в реальном времени; проезжающие водители видят и заезжают. Настройка: один адрес на ТВ + один код из приложения."
  },
  "sv": {
   "dl.park": "🅿️ Ladda ner OtoparkPro",
@@ -2076,7 +2116,9 @@
   "wp.b5t": "Slut på provisionsbråk",
   "wp.eye": "💧 WashPro · För biltvättar",
   "wp.h2": "Chefen i tvättarens ficka.",
-  "wp.lead": "Varje bil från kö till leverans på en tavla. Du jobbar, WashPro håller koll."
+  "wp.lead": "Varje bil från kö till leverans på en tavla. Du jobbar, WashPro håller koll.",
+  "op.b6t": "Skyltfönster-tavla: lediga platser i fönstret",
+  "op.b6s": "Kurens TV visar lediga platser och dina taxor live; förbipasserande förare ser och svänger in. Installation: en URL på TV:n + en kod från appen."
  },
  "th": {
   "dl.park": "🅿️ ดาวน์โหลด OtoparkPro",
@@ -2175,7 +2217,9 @@
   "wp.b5t": "จบปัญหาค่าคอมมิชชัน",
   "wp.eye": "💧 WashPro · สำหรับร้านคาร์แคร์",
   "wp.h2": "เจ้านายในกระเป๋าช่างล้างรถ",
-  "wp.lead": "รถทุกคันตั้งแต่คิวจนส่งมอบอยู่บนบอร์ดเดียว คุณทำงาน ให้ WashPro คอยติดตาม"
+  "wp.lead": "รถทุกคันตั้งแต่คิวจนส่งมอบอยู่บนบอร์ดเดียว คุณทำงาน ให้ WashPro คอยติดตาม",
+  "op.b6t": "ป้ายหน้าร้าน: ที่ว่างโชว์หน้าร้าน",
+  "op.b6s": "ทีวีของป้อมแสดงที่ว่างและอัตราค่าบริการแบบสด คนขับที่ผ่านเห็นแล้วเลี้ยวเข้า ติดตั้ง: เปิดหนึ่ง URL บนทีวี + หนึ่งรหัสจากแอป"
  },
  "tr": {
   "dl.park": "🅿️ OtoparkPro'yu İndir",
@@ -2274,7 +2318,9 @@
   "wp.b5t": "Prim tartışması bitsin",
   "wp.eye": "💧 WashPro · Araç yıkama işletmeleri için",
   "wp.h2": "Yıkamacının cebindeki patron.",
-  "wp.lead": "Kuyruktan teslime her araç tek panoda. Sen işine bak, takibi WashPro yapsın."
+  "wp.lead": "Kuyruktan teslime her araç tek panoda. Sen işine bak, takibi WashPro yapsın.",
+  "op.b6t": "Vitrin panosu: boş yer camda yazsın",
+  "op.b6s": "Kulübedeki TV canlı boş yer sayısını ve tarifeni gösterir; yoldan geçen sürücü doluluğu görüp girer. Kurulum: TV'de tek adres + uygulamadan tek kod."
  },
  "uk": {
   "dl.park": "🅿️ Завантажити OtoparkPro",
@@ -2373,7 +2419,9 @@
   "wp.b5t": "Кінець суперечкам про відсотки",
   "wp.eye": "💧 WashPro · Для автомийок",
   "wp.h2": "Начальник у кишені мийника.",
-  "wp.lead": "Кожне авто від черги до видачі — на одній дошці. Ви працюєте, WashPro веде облік."
+  "wp.lead": "Кожне авто від черги до видачі — на одній дошці. Ви працюєте, WashPro веде облік.",
+  "op.b6t": "Вітринне табло: вільні місця на видноті",
+  "op.b6s": "ТБ у будці показує вільні місця й тарифи наживо; водії, що проїжджають, бачать і заїжджають. Налаштування: одна адреса на ТБ + один код із застосунку."
  },
  "ur": {
   "dl.park": "🅿️ OtoparkPro ڈاؤن لوڈ کریں",
@@ -2472,7 +2520,9 @@
   "wp.b5t": "کمیشن کا جھگڑا ختم",
   "wp.eye": "💧 WashPro · کار واش کاروباروں کے لیے",
   "wp.h2": "دھلائی والے کی جیب میں باس۔",
-  "wp.lead": "قطار سے حوالگی تک ہر گاڑی ایک بورڈ پر۔ آپ کام کریں، ٹریکنگ WashPro کرے۔"
+  "wp.lead": "قطار سے حوالگی تک ہر گاڑی ایک بورڈ پر۔ آپ کام کریں، ٹریکنگ WashPro کرے۔",
+  "op.b6t": "ونڈو بورڈ: خالی جگہیں سامنے",
+  "op.b6s": "کیبن کا ٹی وی براہ راست خالی جگہیں اور نرخ دکھاتا ہے؛ گزرتا ڈرائیور دیکھ کر اندر آتا ہے۔ سیٹ اپ: ٹی وی پر ایک پتہ + ایپ سے ایک کوڈ۔"
  },
  "vi": {
   "dl.park": "🅿️ Tải OtoparkPro",
@@ -2571,7 +2621,9 @@
   "wp.b5t": "Hết tranh cãi hoa hồng",
   "wp.eye": "💧 WashPro · Cho tiệm rửa xe",
   "wp.h2": "Ông chủ trong túi người thợ rửa.",
-  "wp.lead": "Mỗi chiếc xe từ hàng chờ đến khi giao trên một bảng duy nhất. Bạn cứ làm việc, WashPro lo phần theo dõi."
+  "wp.lead": "Mỗi chiếc xe từ hàng chờ đến khi giao trên một bảng duy nhất. Bạn cứ làm việc, WashPro lo phần theo dõi.",
+  "op.b6t": "Bảng cửa kính: chỗ trống ngay trên kính",
+  "op.b6s": "TV chốt gác hiển thị trực tiếp số chỗ trống và giá; tài xế đi ngang thấy là rẽ vào. Cài đặt: một địa chỉ trên TV + một mã từ ứng dụng."
  },
  "zh": {
   "dl.park": "🅿️ 下载 OtoparkPro",
@@ -2670,6 +2722,8 @@
   "wp.b5t": "提成争议到此为止",
   "wp.eye": "💧 WashPro · 面向洗车行业",
   "wp.h2": "洗车工口袋里的老板。",
-  "wp.lead": "从排队到交车,每辆车都在一块看板上。你专心干活,WashPro 负责跟踪。"
+  "wp.lead": "从排队到交车,每辆车都在一块看板上。你专心干活,WashPro 负责跟踪。",
+  "op.b6t": "橱窗看板:空位写在窗上",
+  "op.b6s": "岗亭电视实时显示空位数与价目;路过的司机看到就开进来。设置:电视打开一个网址 + 应用里输入一个代码。"
  }
 }
