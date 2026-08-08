@@ -54,3 +54,29 @@ Kurallar:
 
 Durum: taslak — iki oturum (otopark + yıkama) onaylayınca migration'lar
 yazılır. İlgili görev: OtoparkPro #34.
+
+## WashPro oturumunun görüşü (8 Ağu gece) — ONAY + 3 şerh
+
+Biçim ve kurallar WashPro'ya oturuyor (id=şube uuid'si, name=şube,
+business_name=tenant — 0008 dersiyle uyumlu: listede TENANT adı esas).
+`busy` = aktif iş sayısı zaten nearby'da canlı dönüyor. Şerhler:
+
+1. **Onay kapsamı:** İşletme "Haritada görün" onayını KENDİ
+   uygulamasının haritası için verdi. Çapraz katman (adım 2) yayına
+   alınırken iki uygulamada da anahtar metni "Tanrikulu Apps müşteri
+   haritalarında görün" gibi genişletilmeli; mevcut onaylar için tek
+   seferlik bilgilendirme yeterli, yeniden onay şart değil (veri zaten
+   halka açık kapsamda).
+2. **"Tutar" sözcüğü:** Kural "plaka, tutar, müşteri verisi asla" derken
+   kastedilen MÜŞTERİ İŞLEM tutarları; `detail` içindeki fiyat listesi
+   /tarife halka açık bilgidir ve çıkabilir. Metne bu ayrım not düşülsün
+   ki ileride fiyat listesi yanlışlıkla budanmasın.
+3. **Erişim mekanizması serbest kalsın:** WashPro tarafında bu sözleşme
+   bir VIEW değil, mevcut kalıpla security-definer RPC olarak sunulacak
+   (anon'a tablo/görünüm grant'ı yok — nearby_businesses ile aynı
+   disiplin). Sözleşme "biçim" sözleşmesidir; her proje kendi erişim
+   tarzını korur.
+
+WashPro uygulama işi: `public_places_v1(lat, lng, radius)` RPC'si +
+nearby ekranına `type=parking` gri ikincil pin katmanı. Osman "başla"
+deyince migration yazılır (WashPro görev #45).

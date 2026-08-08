@@ -189,7 +189,21 @@
   #otoparkpro .btn-main:hover{background:#16296b}
 
   /* ---------- Telefon maketi ---------- */
-  .phone-wrap{display:flex;justify-content:center}
+  .phone-wrap{display:flex;justify-content:center;position:relative}
+  /* Ana ekran widget'i maketi: telefonun yanina, ekrandan kopmus gibi.
+     Uygulamanin 8 Agu widget tasarimiyla birebir (hap renkleri, BUGUN). */
+  .wmock{position:absolute;inset-inline-start:-34px;bottom:34px;width:158px;
+         background:linear-gradient(180deg,#0E7490,#0B4A5E);border-radius:20px;
+         padding:11px;box-shadow:0 18px 44px rgba(2,20,27,.4);z-index:2}
+  .wmock .wh{font-size:8.5px;font-weight:800;color:#fff;opacity:.92;margin-bottom:7px}
+  .wmock .wpills{display:flex;gap:4px}
+  .wmock .wp{flex:1;border-radius:9px;padding:5px 0;text-align:center;color:#fff}
+  .wmock .wp b{display:block;font-size:12px}
+  .wmock .wp s{text-decoration:none;font-size:5.5px;font-weight:800;opacity:.9}
+  .wmock .wi{margin-top:7px;font-size:11px;font-weight:800;color:#FBBF24}
+  .wmock .wi s{text-decoration:none;font-size:5.5px;color:rgba(255,255,255,.65);
+               margin-inline-end:4px;font-weight:800}
+  @media(max-width:860px){.wmock{inset-inline-start:4px}}
   .phone{width:min(330px,86vw);aspect-ratio:290/600;background:#0b0b0f;border-radius:48px;padding:11px;
          box-shadow:var(--shadow-phone),inset 0 0 0 2px rgba(255,255,255,.08)}
   .screen{width:100%;height:100%;border-radius:39px;overflow:hidden;display:flex;flex-direction:column;font-size:10px;color:#0f172a}
@@ -450,6 +464,15 @@
       </div>
     </div>
     <div class="phone-wrap rv">
+      <div class="wmock" lang="tr" aria-hidden="true">
+        <div class="wh">💧 Merkez</div>
+        <div class="wpills">
+          <span class="wp" style="background:rgba(34,211,238,.28)"><b>2</b><s>İŞLEMDE</s></span>
+          <span class="wp" style="background:rgba(52,211,153,.28)"><b>1</b><s>HAZIR</s></span>
+          <span class="wp" style="background:rgba(148,163,184,.28)"><b>1</b><s>SIRADA</s></span>
+        </div>
+        <div class="wi"><s>BUGÜN</s>₺4.250</div>
+      </div>
       <div class="phone"><div class="screen scr-wash">
         <div class="wash-head">
           <div class="notch"><i></i></div>

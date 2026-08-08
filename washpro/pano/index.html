@@ -22,7 +22,12 @@
   header{display:flex;align-items:center;gap:1.2vw;margin-bottom:2vh}
   .mark{height:8vh;width:auto;filter:drop-shadow(0 6px 16px rgba(0,0,0,.4))}
   .brand{font-size:1.7vh;font-weight:800;color:#7DD3FC;letter-spacing:2.5px}
-  .biz{font-size:3.6vh;font-weight:800;letter-spacing:.4px}
+  /* Isletme adi sahnenin yildizi (8 Agu, Osman: "cansiz, daha buyuk
+     ve canli renkle"): buyuk punto + camgobegi-beyaz degrade + isilti. */
+  .biz{font-size:5.2vh;font-weight:800;letter-spacing:.4px;line-height:1.15;
+       background:linear-gradient(92deg,#67E8F9 0%,#A5F3FC 45%,#fff 100%);
+       -webkit-background-clip:text;background-clip:text;color:transparent;
+       filter:drop-shadow(0 2px 14px rgba(103,232,249,.35))}
   .right{margin-inline-start:auto;text-align:end}
   .clock{font-size:4.6vh;font-weight:800;font-variant-numeric:tabular-nums;line-height:1}
   .date{font-size:1.7vh;color:rgba(255,255,255,.6);font-weight:600;margin-top:.4vh}
