@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WashPro — TV Panosu</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📺</text></svg>">
+<style>
+  /* TV'deki eslestirme karekodu telefonun NORMAL kamerasiyla
+     okutulursa buraya duser: eslestirme yalniz uygulamadan yapilir
+     (hesapla imzalanir), o yuzden yol tarifi + indirme dugmesi. */
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+       background:linear-gradient(170deg,#07222c,#0b3a49 60%,#0E7490);min-height:100vh;color:#fff;
+       display:flex;align-items:center;justify-content:center;padding:20px}
+  .card{width:100%;max-width:400px;background:#fff;color:#0f172a;border-radius:24px;
+        padding:28px 24px;box-shadow:0 30px 80px rgba(0,0,0,.4);text-align:center}
+  .brand{font-size:13px;font-weight:800;color:#0E7490;letter-spacing:1px;margin-bottom:14px}
+  h1{font-size:20px;font-weight:800;margin-bottom:10px}
+  p{font-size:14px;color:#475569;line-height:1.6}
+  .steps{text-align:start;margin:16px auto 4px;max-width:320px}
+  .steps div{display:flex;gap:10px;margin-bottom:10px;font-size:14px;line-height:1.5}
+  .steps b{flex:none;width:24px;height:24px;border-radius:50%;background:#0E7490;color:#fff;
+           display:flex;align-items:center;justify-content:center;font-size:13px}
+  a.btn{display:block;margin-top:18px;background:#0E7490;color:#fff;text-decoration:none;
+        font-weight:800;padding:14px;border-radius:14px}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="brand">💧 WASHPRO</div>
+  <h1 id="t">Bu karekod TV eşleştirmesi için</h1>
+  <p id="s">Eşleştirme, işletme hesabınla imzalandığı için yalnız WashPro uygulamasından yapılır:</p>
+  <div class="steps">
+    <div><b>1</b><span id="s1">WashPro uygulamasını aç</span></div>
+    <div><b>2</b><span id="s2">Ayarlar → TV Panosu</span></div>
+    <div><b>3</b><span id="s3">"TV'deki karekodu okut" ile bu kodu tekrar okut</span></div>
+  </div>
+  <a class="btn" href="/washpro/get/" id="dl">WashPro'yu indir</a>
+</div>
+<script>
+// Kisa ceviri: yalniz 5 metin. Desteklenmeyen dil Ingilizce'ye duser.
+const M = {
+ tr:{t:'Bu karekod TV eşleştirmesi için',s:'Eşleştirme, işletme hesabınla imzalandığı için yalnız WashPro uygulamasından yapılır:',s1:'WashPro uygulamasını aç',s2:'Ayarlar → TV Panosu',s3:'"TV\'deki karekodu okut" ile bu kodu tekrar okut',dl:"WashPro'yu indir"},
+ en:{t:'This QR is for TV pairing',s:'Pairing is signed with your business account, so it is done only from the WashPro app:',s1:'Open the WashPro app',s2:'Settings → TV Board',s3:'Use "Scan the QR on the TV" to scan this code again',dl:'Download WashPro'},
+ de:{t:'Dieser QR-Code dient der TV-Kopplung',s:'Die Kopplung wird mit deinem Firmenkonto signiert und erfolgt daher nur in der WashPro-App:',s1:'WashPro-App öffnen',s2:'Einstellungen → TV-Tafel',s3:'Mit „QR-Code am TV scannen" diesen Code erneut scannen',dl:'WashPro laden'},
+ es:{t:'Este QR es para vincular el televisor',s:'La vinculación se firma con tu cuenta de negocio, así que solo se hace desde la app WashPro:',s1:'Abre la app WashPro',s2:'Ajustes → Panel de TV',s3:'Usa «Escanear el QR del televisor» y escanea este código de nuevo',dl:'Descargar WashPro'},
+ fr:{t:'Ce QR sert à connecter le téléviseur',s:'Le jumelage est signé avec votre compte, il se fait donc uniquement depuis l\'appli WashPro :',s1:'Ouvrez l\'appli WashPro',s2:'Réglages → Tableau TV',s3:'Utilisez « Scanner le QR du téléviseur » et scannez à nouveau ce code',dl:'Télécharger WashPro'},
+ ru:{t:'Этот QR — для подключения телевизора',s:'Подключение подписывается вашим бизнес-аккаунтом, поэтому выполняется только из приложения WashPro:',s1:'Откройте приложение WashPro',s2:'Настройки → ТВ-табло',s3:'Нажмите «Сканировать QR с телевизора» и отсканируйте этот код ещё раз',dl:'Скачать WashPro'},
+ ar:{t:'رمز QR هذا لربط التلفاز',s:'يُوقَّع الربط بحساب منشأتك، لذا يتم فقط من تطبيق WashPro:',s1:'افتح تطبيق WashPro',s2:'الإعدادات ← شاشة العرض',s3:'استخدم «امسح رمز QR على التلفاز» وامسح هذا الرمز مجددًا',dl:'حمِّل WashPro'}
+};
+const lang = (navigator.languages||[navigator.language||'en'])
+  .map(x=>String(x).slice(0,2).toLowerCase()).find(x=>M[x]) || 'en';
+const m = M[lang];
+document.documentElement.lang = lang;
+if (['ar'].includes(lang)) document.documentElement.dir = 'rtl';
+for (const k of ['t','s','s1','s2','s3','dl'])
+  document.getElementById(k).textContent = m[k];
+</script>
+</body>
+</html>
