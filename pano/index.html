@@ -44,6 +44,16 @@
   .empty{grid-column:1/-1;text-align:center;color:rgba(255,255,255,.8);
          font-size:3vh;font-weight:700;padding-top:12vh}
   .err{text-align:center;color:rgba(255,255,255,.7);font-size:2.4vh;padding-top:14vh}
+  /* Eslestirme ekrani: TV kumandayla uzun adres yazilmaz — TV bu
+     karekodu gosterir, isletmeci UYGULAMADAN telefonla okutur. */
+  .pair{grid-column:1/-1;display:flex;flex-direction:column;align-items:center;
+        justify-content:center;padding-top:4vh;text-align:center}
+  .pair-card{background:#fff;border-radius:2.4vh;padding:3vh;
+             box-shadow:0 20px 60px rgba(0,0,0,.4)}
+  .pair-card > div{display:flex;justify-content:center}
+  .pair p{margin-top:2.4vh;font-size:2.6vh;font-weight:700;max-width:70vw;line-height:1.5}
+  .pair s{text-decoration:none;display:block;margin-top:1vh;font-size:1.8vh;
+          color:rgba(255,255,255,.6)}
   footer{margin-top:1.6vh;font-size:1.6vh;color:rgba(255,255,255,.55);
          display:flex;justify-content:space-between;align-items:flex-end}
   /* Musteri kendi telefonundan da izleyebilsin: indirme QR'i.
@@ -66,17 +76,21 @@
 </header>
 <div class="cols" id="cols"><div class="err" id="msg">…</div></div>
 <footer>
-  <span id="footTxt"></span>
+  <span></span>
   <div class="foot-right">
     <div class="qr"><img src="/washpro/poster/qr-get.png" alt="QR"><s id="qrTxt"></s></div>
     <span>tanrikuluapps.com</span>
   </div>
 </footer>
 <script src="/t/i18n.js"></script>
+<script src="/pano/qrcode.min.js"></script>
 <script>
 const SUPA = 'https://jlnxyqcjczqtbvviduof.supabase.co';
 const KEY  = 'sb_publishable_h5ZwQrTIoDnBZ6V4YBC0NA_59g2PvOh';
-const token = (location.hash || '').replace('#','').trim();
+// Kod: adresteki #token (geriye uyum) ya da onceki eslestirmeden
+// localStorage. Ikisi de yoksa eslestirme ekrani acilir.
+let token = (location.hash || '').replace('#','').trim()
+    || localStorage.getItem('panoToken') || '';
 
 // "Su an bekleyen arac yok" — /t/ sozlugunde olmayan tek metin.
 const EMPTY = {
@@ -96,6 +110,37 @@ const EMPTY = {
   zh:'当前没有等候的车辆'
 };
 
+// Eslestirme yonergesi (TV ekraninda gorunur).
+const PAIR = {
+  tr:'Bu ekranı bağlamak için WashPro uygulamasında Ayarlar → TV Panosu → "TV\'deki karekodu okut" adımını izle',
+  en:'To connect this screen, open the WashPro app: Settings → TV Board → "Scan the QR on the TV"',
+  de:'Zum Verbinden in der WashPro-App: Einstellungen → TV-Tafel → „QR-Code am TV scannen“',
+  fr:'Pour connecter cet écran : appli WashPro → Réglages → Tableau TV → « Scanner le QR du téléviseur »',
+  es:'Para conectar esta pantalla: app WashPro → Ajustes → Panel de TV → «Escanear el QR del televisor»',
+  it:'Per collegare questo schermo: app WashPro → Impostazioni → Bacheca TV → “Scansiona il QR sul TV”',
+  pt:'Para conectar esta tela: app WashPro → Ajustes → Painel de TV → "Escanear o QR da TV"',
+  nl:'Om dit scherm te koppelen: WashPro-app → Instellingen → TV-bord → "Scan de QR op de tv"',
+  sv:'Koppla skärmen: WashPro-appen → Inställningar → TV-tavla → "Skanna QR-koden på TV:n"',
+  pl:'Aby połączyć ekran: aplikacja WashPro → Ustawienia → Tablica TV → „Zeskanuj kod QR z telewizora"',
+  cs:'Připojení obrazovky: aplikace WashPro → Nastavení → TV tabule → „Naskenuj QR z televize"',
+  ro:'Pentru a conecta ecranul: aplicația WashPro → Setări → Panou TV → „Scanează codul QR de pe TV"',
+  el:'Για σύνδεση της οθόνης: εφαρμογή WashPro → Ρυθμίσεις → Πίνακας TV → «Σάρωσε το QR της τηλεόρασης»',
+  ru:'Чтобы подключить экран: приложение WashPro → Настройки → ТВ-табло → «Сканировать QR с телевизора»',
+  uk:'Щоб під\'єднати екран: застосунок WashPro → Налаштування → ТВ-табло → «Сканувати QR з телевізора»',
+  az:'Bu ekranı bağlamaq üçün WashPro tətbiqində Ayarlar → TV Lövhəsi → "TV-dəki kodu oxut" addımını izlə',
+  ar:'لربط هذه الشاشة: تطبيق WashPro ← الإعدادات ← شاشة العرض ← «امسح رمز QR على التلفاز»',
+  he:'לחיבור המסך: אפליקציית WashPro → הגדרות → לוח טלוויזיה → "סרוק את הקוד שבטלוויזיה"',
+  fa:'برای اتصال این صفحه: برنامه WashPro → تنظیمات → تابلوی تلویزیون → «کد QR روی تلویزیون را اسکن کن»',
+  ur:'اس اسکرین کو جوڑنے کے لیے: WashPro ایپ → ترتیبات → ٹی وی بورڈ → «ٹی وی پر موجود QR اسکین کریں»',
+  hi:'इस स्क्रीन को जोड़ने के लिए: WashPro ऐप → सेटिंग्स → टीवी बोर्ड → "टीवी पर दिख रहा QR स्कैन करें"',
+  id:'Untuk menghubungkan layar ini: aplikasi WashPro → Setelan → Papan TV → "Pindai QR di TV"',
+  vi:'Để kết nối màn hình này: ứng dụng WashPro → Cài đặt → Bảng TV → "Quét mã QR trên TV"',
+  th:'เชื่อมต่อหน้าจอนี้: แอป WashPro → การตั้งค่า → บอร์ดทีวี → "สแกน QR บนทีวี"',
+  ja:'この画面を接続するには:WashProアプリ → 設定 → TVボード →「テレビのQRを読み取る」',
+  ko:'이 화면을 연결하려면: WashPro 앱 → 설정 → TV 보드 → "TV의 QR 스캔"',
+  zh:'连接此屏幕:WashPro 应用 → 设置 → 电视看板 → "扫描电视上的二维码"'
+};
+
 const LANG = (function(){
   const q = new URLSearchParams(location.search).get('lang');
   if (q && T[q]) return q;
@@ -108,7 +153,6 @@ const LANG = (function(){
 const L = T[LANG];
 document.documentElement.lang = LANG;
 if (['ar','fa','he','ur'].includes(LANG)) document.documentElement.dir = 'rtl';
-document.getElementById('footTxt').textContent = L.foot;
 document.getElementById('qrTxt').textContent = L.dl;
 
 function tick(){
@@ -150,33 +194,76 @@ function render(data){
     <div class="col ${cls}"><h2><span class="dot"></span>${esc(title)}
       <span class="n">${list.length}</span></h2>
       ${list.map(j => card(j, ready)).join('')}</div>`;
+  // Islem sirasina gore soldan saga: kuyruk -> islemde -> hazir
+  // (Osman'in istegi; surec dogal akisiyla okunur).
   cols.innerHTML =
-    col('c-washing', L.statusWashing, by('washing'), false) +
     col('c-queued',  L.statusQueued,  by('queued'),  false) +
+    col('c-washing', L.statusWashing, by('washing'), false) +
     col('c-ready',   L.statusReady,   by('ready'),   true);
 }
 
+async function rpc(name, params){
+  const r = await fetch(`${SUPA}/rest/v1/rpc/${name}`, {
+    method:'POST',
+    headers:{'Content-Type':'application/json','apikey':KEY,
+             'Authorization':`Bearer ${KEY}`},
+    body: JSON.stringify(params)
+  });
+  if (!r.ok) throw new Error(String(r.status));
+  return r.json();
+}
+
+// ---- Eslestirme: TV karekod OKUTAMAZ, GOSTERIR (8 Agu, Osman).
+// TV bu sayfayi kodsuz acar, buyuk bir eslestirme karekodu cizer;
+// isletmeci uygulamadan telefonla okutur. Sunucu eslesmeyi tek
+// kullanimlik teslim eder, TV kodu localStorage'a kalici yazar.
+function showPairing(){
+  const cols = document.getElementById('cols');
+  cols.innerHTML = `<div class="pair"><div class="pair-card"><div id="pairQr"></div></div>
+    <p>${esc(PAIR[LANG] || PAIR.en)}</p><s>tanrikuluapps.com/pano</s></div>`;
+  const pairId = crypto.randomUUID();
+  new QRCode(document.getElementById('pairQr'), {
+    text: 'WASHPRO-PANO:' + pairId,
+    width: Math.round(innerHeight * 0.34),
+    height: Math.round(innerHeight * 0.34),
+    correctLevel: QRCode.CorrectLevel.M
+  });
+  const t = setInterval(async () => {
+    try{
+      const tok = await rpc('poll_display_pairing', {pair: pairId});
+      if (tok){
+        clearInterval(t);
+        localStorage.setItem('panoToken', tok);
+        token = tok;
+        load();
+      }
+    }catch(e){ /* ag gelip gecici; sormaya devam */ }
+  }, 3000);
+}
+
 // TV gun boyu acik kalir: TEK basarisiz istek yuzunden dolu ekrani
-// hata sayfasina dusurme. Veri bir kez geldiyse ancak arka arkaya
-// 4 basarisizlikta (>=1 dk) hata gosterilir; kod gecersizse dogal
-// olarak hep basarisiz olur ve hata kalici gorunur.
-let hadData = false, misses = 0;
+// bozma. Ag hatasi (catch) ile "kod gecersiz" (sunucu null dondurdu)
+// AYRI sayilir: null iki kez ust uste gelirse kod artik gecersizdir
+// (yenilenmis olabilir) — eslestirme ekranina donulur.
+let hadData = false, misses = 0, invalid = 0;
 async function load(){
-  if (!token){ render(null); return; }
+  if (!token){ showPairing(); return; }
   try{
-    const r = await fetch(`${SUPA}/rest/v1/rpc/display_board`, {
-      method:'POST',
-      headers:{'Content-Type':'application/json','apikey':KEY,
-               'Authorization':`Bearer ${KEY}`},
-      body: JSON.stringify({token})
-    });
-    const data = r.ok ? await r.json() : null;
-    if (data){ hadData = true; misses = 0; render(data); }
-    else { misses++; if (!hadData || misses >= 4) render(null); }
-  }catch(e){ misses++; if (!hadData || misses >= 4) render(null); }
+    const data = await rpc('display_board', {token});
+    if (data){ hadData = true; misses = 0; invalid = 0; render(data); }
+    else {
+      invalid++;
+      if (invalid >= 2){
+        localStorage.removeItem('panoToken');
+        token = '';
+        location.hash = '';
+        showPairing();
+      }
+    }
+  }catch(e){ misses++; if (!hadData && misses >= 4) render(null); }
 }
 load();
-setInterval(load, 15000);
+setInterval(() => { if (token) load(); }, 15000);
 </script>
 </body>
 </html>

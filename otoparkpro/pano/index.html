@@ -41,6 +41,13 @@
          font-size:clamp(12px,1.4vw,16px);color:#64748B}
   #err{display:none;padding:40px;text-align:center;font-size:20px;
        color:#FCA5A5}
+  #pair{flex:1;display:none;flex-direction:column;align-items:center;
+        justify-content:center;gap:3vh;text-align:center;padding:24px}
+  #pair .code{font-size:clamp(70px,18vw,220px);font-weight:800;
+              letter-spacing:.12em;font-variant-numeric:tabular-nums}
+  #pair .how{font-size:clamp(16px,2.4vw,26px);color:#93C5FD;
+             line-height:1.6;max-width:34em}
+  #pair .wait{font-size:clamp(13px,1.6vw,18px);color:#64748B}
 </style>
 </head>
 <body>
@@ -51,7 +58,12 @@
   <div class="clock" id="clock"></div>
 </header>
 <div id="err"></div>
-<main id="main">
+<div id="pair">
+  <div class="how" id="pair-how"></div>
+  <div class="code" id="pair-code"></div>
+  <div class="wait" id="pair-wait"></div>
+</div>
+<main id="main" style="display:none">
   <div class="free">
     <div class="label" id="l-free">BOŞ YER</div>
     <div class="count" id="free">—</div>
@@ -76,15 +88,20 @@ const SUPA = 'https://itjslckrcplrbjurwvtz.supabase.co';
 const KEY  = 'sb_publishable_xBlCzeWSSb2Np9pToL-y7w_9L6SRLLj';
 
 const q = new URLSearchParams(location.search);
-const lot = q.get('lot');
+// Oncelik: adresteki lot > TV'nin hatirladigi lot > eslestirme ekrani.
+let lot = q.get('lot') || localStorage.getItem('otopark_pano_lot');
 const lang = (q.get('lang') || 'tr').slice(0,2);
 const T = {
   tr: {free:'BOŞ YER', tariff:'TARİFE', upTo:'{m} dk’ya kadar', over:'ve üzeri',
        grace:'İlk {m} dk ücretsiz', cap:'Günlük tavan {p}',
-       full:'DOLU', err:'Pano bulunamadı. Bağlantıyı kontrol edin.'},
+       full:'DOLU', err:'Pano bulunamadı. Bağlantıyı kontrol edin.',
+       how:'Bu panoyu işletmenize bağlamak için OtoparkPro uygulamasında Ayarlar → Vitrin Panosu bölümüne girin ve bu kodu yazın:',
+       wait:'Bağlantı bekleniyor…'},
   en: {free:'FREE SPOTS', tariff:'RATES', upTo:'up to {m} min', over:'and over',
        grace:'First {m} min free', cap:'Daily cap {p}',
-       full:'FULL', err:'Board not found. Check the link.'},
+       full:'FULL', err:'Board not found. Check the link.',
+       how:'To link this board to your business, open OtoparkPro → Settings → Display Board and enter this code:',
+       wait:'Waiting for pairing…'},
 };
 const L = T[lang] || T.tr;
 document.getElementById('l-free').textContent = L.free;
@@ -135,7 +152,49 @@ async function load(){
     err.style.display='block'; err.textContent = L.err;
   }
 }
-load(); setInterval(load, 30000);
+// ---- Eslestirme modu ----
+// TV kendi 6 haneli kodunu uretir, buyuk gosterir ve uygulamadan
+// baglanmasini bekler (Osman'in akisi, 8 Agu). Baglanan sube
+// localStorage'a yazilir; TV bir daha sormaz.
+function startPairing(){
+  const code = String(Math.floor(100000 + Math.random()*900000));
+  document.getElementById('pair').style.display='flex';
+  document.getElementById('pair-how').textContent = L.how;
+  document.getElementById('pair-code').textContent =
+      code.slice(0,3) + ' ' + code.slice(3);
+  document.getElementById('pair-wait').textContent = L.wait;
+  const timer = setInterval(async () => {
+    try{
+      const r = await fetch(`${SUPA}/rest/v1/board_pairings?code=eq.${code}&select=branch_id`,
+          {headers:{apikey:KEY}});
+      const rows = await r.json();
+      if (Array.isArray(rows) && rows.length) {
+        clearInterval(timer);
+        lot = rows[0].branch_id;
+        localStorage.setItem('otopark_pano_lot', lot);
+        document.getElementById('pair').style.display='none';
+        document.getElementById('main').style.display='flex';
+        load(); setInterval(load, 30000);
+      }
+    }catch(e){/* gecici ag hatasi: sonraki turda dener */}
+  }, 3000);
+}
+
+// Gizli cozme: alt bilgiye 5 kez dokun -> eslestirme sifirlanir
+// (TV baska isletmeye devredilirse).
+let taps = 0;
+document.querySelector('footer').addEventListener('click', () => {
+  if (++taps >= 5) { localStorage.removeItem('otopark_pano_lot');
+                     location.href = location.pathname; }
+  setTimeout(() => taps = 0, 3000);
+});
+
+if (lot) {
+  document.getElementById('main').style.display='flex';
+  load(); setInterval(load, 30000);
+} else {
+  startPairing();
+}
 </script>
 </body>
 </html>
