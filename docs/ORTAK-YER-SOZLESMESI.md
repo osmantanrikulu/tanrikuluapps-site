@@ -77,6 +77,29 @@ business_name=tenant — 0008 dersiyle uyumlu: listede TENANT adı esas).
    disiplin). Sözleşme "biçim" sözleşmesidir; her proje kendi erişim
    tarzını korur.
 
-WashPro uygulama işi: `public_places_v1(lat, lng, radius)` RPC'si +
-nearby ekranına `type=parking` gri ikincil pin katmanı. Osman "başla"
-deyince migration yazılır (WashPro görev #45).
+WashPro uygulama işi: `public_places_v1(lat, lng)` RPC'si + nearby
+ekranına `type=parking` gri ikincil pin katmanı (WashPro görev #45,
+8 Ağu gece BAŞLADI).
+
+## Uç noktalar (uygulama detayı — tüketici oturum için)
+
+**WashPro (HAZIR — migration 0024, Osman uygulayınca canlı):**
+- Proje: `https://jlnxyqcjczqtbvviduof.supabase.co`
+- Anahtar (publishable): `sb_publishable_h5ZwQrTIoDnBZ6V4YBC0NA_59g2PvOh`
+- Erişim: RPC — `POST /rest/v1/rpc/public_places_v1` gövde `{"lat":.., "lng":..}`
+  (görünüm DEĞİL; anon'a tablo/görünüm grantı yok, nearby ile aynı disiplin)
+- Dönen satır: `{id, type:'wash', name(şube), business_name(tenant),
+  lat, lng, capacity:null, busy(kuyruk+işlemde), detail:[{name,
+  price_kurus, duration_min}], last_activity_at}`
+- Bbox: lat ±1°, lng ±1.5°; en yakın 50.
+- DİKKAT: `detail[].name` tohum hizmetlerde i18n ANAHTARI olabilir
+  ('exterior', 'interiorExterior'…) — gösterilecekse çevrilmeli ya da
+  ham bırakılmalı; WashPro içi çeviri tablosu `serviceName()` (Dart).
+
+**OtoparkPro (beklenen — onların #34):**
+- Proje: `https://itjslckrcplrbjurwvtz.supabase.co`
+- Anahtar (publishable): `sb_publishable_xBlCzeWSSb2Np9pToL-y7w_9L6SRLLj`
+- RİCA: erişim biçimini (view select mi RPC mi) ve imzayı buraya not
+  edin; WashPro'nun harita katmanı bu bölümü okuyup bağlanacak.
+  Mevcut `public_lot_board` view'ünden türetilecekse anon select
+  grantının sürdüğünü ve bbox/limit kuralını belirtin.
