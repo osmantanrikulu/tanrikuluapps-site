@@ -15,7 +15,9 @@
   header{display:flex;align-items:center;gap:16px;padding:24px 32px;
          background:rgba(255,255,255,.06)}
   header img{width:52px;height:52px;border-radius:12px}
-  header .name{font-size:clamp(20px,3vw,34px);font-weight:800}
+  /* Isletme adi vitrinin sahibi: buyuk ve sicak renkli (Osman, 8 Agu). */
+  header .name{font-size:clamp(24px,3.8vw,46px);font-weight:800;
+               color:#FBBF24;letter-spacing:.02em}
   header .sub{font-size:clamp(13px,1.6vw,18px);color:#93C5FD}
   header .clock{margin-left:auto;font-size:clamp(20px,3vw,34px);
                 font-weight:700;font-variant-numeric:tabular-nums}
@@ -38,7 +40,12 @@
   .row .price{font-weight:800;font-variant-numeric:tabular-nums}
   .note{margin-top:2vh;font-size:clamp(13px,1.6vw,18px);color:#94A3B8}
   footer{padding:14px 32px;display:flex;justify-content:space-between;
-         font-size:clamp(12px,1.4vw,16px);color:#64748B}
+         align-items:center;font-size:clamp(12px,1.4vw,16px);color:#64748B}
+  .promo{display:flex;align-items:center;gap:12px;text-align:right}
+  .promo img{width:clamp(64px,8vw,104px);height:auto;border-radius:8px;
+             background:#fff;padding:4px}
+  .promo .t{line-height:1.45}
+  .promo .t b{color:#93C5FD}
   #err{display:none;padding:40px;text-align:center;font-size:20px;
        color:#FCA5A5}
   #pair{flex:1;display:none;flex-direction:column;align-items:center;
@@ -76,7 +83,11 @@
   </div>
 </main>
 <footer>
-  <span>OtoparkPro</span><span>tanrikuluapps.com</span>
+  <span>OtoparkPro</span>
+  <div class="promo">
+    <div class="t" id="promo-t"></div>
+    <img src="/otoparkpro/pano/qr-promo.svg" alt="tanrikuluapps.com/otoparkpro">
+  </div>
 </footer>
 <script src="/otoparkpro/fee.js"></script>
 <script>
@@ -96,16 +107,20 @@ const T = {
        grace:'İlk {m} dk ücretsiz', cap:'Günlük tavan {p}',
        full:'DOLU', err:'Pano bulunamadı. Bağlantıyı kontrol edin.',
        how:'Bu panoyu işletmenize bağlamak için OtoparkPro uygulamasında Ayarlar → Vitrin Panosu bölümüne girin ve bu kodu yazın:',
-       wait:'Bağlantı bekleniyor…'},
+       wait:'Bağlantı bekleniyor…',
+       promo:'Bu pano <b>OtoparkPro</b> ile hazırlandı<br>Kendi otoparkınız için okutun'},
   en: {free:'FREE SPOTS', tariff:'RATES', upTo:'up to {m} min', over:'and over',
        grace:'First {m} min free', cap:'Daily cap {p}',
        full:'FULL', err:'Board not found. Check the link.',
        how:'To link this board to your business, open OtoparkPro → Settings → Display Board and enter this code:',
-       wait:'Waiting for pairing…'},
+       wait:'Waiting for pairing…',
+       promo:'This board is powered by <b>OtoparkPro</b><br>Scan for your own parking lot'},
 };
 const L = T[lang] || T.tr;
 document.getElementById('l-free').textContent = L.free;
 document.getElementById('l-tariff').textContent = L.tariff;
+// Metin bizden gelir (T sozlugu), kullanici girdisi degil.
+document.getElementById('promo-t').innerHTML = L.promo;
 
 function tick(){
   document.getElementById('clock').textContent =
@@ -121,8 +136,11 @@ async function load(){
     const rows = await r.json();
     if(!Array.isArray(rows) || !rows.length) throw 0;
     const b = rows[0];
-    document.getElementById('lotname').textContent = b.name;
-    document.getElementById('bizname').textContent = b.business_name;
+    // Buyuk renkli satir ISLETME adinin (marka); sube alt satirda,
+    // isletmeyle ayniysa gizlenir (tek subeli tipik kurulum).
+    document.getElementById('lotname').textContent = b.business_name;
+    document.getElementById('bizname').textContent =
+        b.name === b.business_name ? '' : b.name;
     const free = b.capacity == null ? null : Math.max(0, b.capacity - b.occupied);
     const el = document.getElementById('free');
     if (free == null) { el.textContent = '∞'; }
