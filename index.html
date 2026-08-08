@@ -308,6 +308,8 @@
   .qr-card .qeta b{display:block;font-size:20px;color:var(--teal)}
   .qr-card .qeta s{text-decoration:none;font-size:9.5px;color:#64748B;letter-spacing:.5px;font-weight:700}
 
+  .phone-real{width:min(310px,78vw);height:auto;border-radius:34px;
+              border:6px solid #0f172a;box-shadow:0 24px 54px rgba(15,42,110,.30)}
   .tab-shot{max-width:880px;margin:64px auto 0;padding:0 8px;text-align:center}
   .tab-shot img{width:100%;height:auto;border-radius:22px;border:1px solid var(--hair);
                 box-shadow:0 18px 44px rgba(15,42,110,.16)}
@@ -602,34 +604,13 @@
 <section class="product" id="otoparkpro">
   <div class="prod-in">
     <div class="phone-wrap rv">
-      <div class="phone"><div class="screen scr-park">
-        <div class="park-head">
-          <div class="notch"><i></i></div>
-          <div class="wash-title">🅿️ OtoparkPro</div>
-          <div class="gauge"><div class="ring"><i>34/50<s>DOLULUK</s></i></div></div>
-          <div class="stats">
-            <div class="stat"><s>BUGÜNKÜ GELİR</s><b>₺7.900</b></div>
-            <div class="stat"><s>ÇIKIŞ</s><b>41</b></div>
-          </div>
-        </div>
-        <div class="chips"><span class="chip" style="background:#E4EAFB;color:#1D4ED8">İçerideki araçlar · 34</span></div>
-        <div class="job" style="--jc:#3B82F6">
-          <div class="plate"><i>TR</i><em>34 VZ 907</em></div>
-          <div class="mid"><b>Giriş 09:12</b><s>4 sa 26 dk</s></div>
-          <div class="act" style="background:#3B82F6">Çıkış</div>
-        </div>
-        <div class="job" style="--jc:#10B981">
-          <div class="plate"><i>TR</i><em>16 ABN 61</em></div>
-          <div class="mid"><b>Giriş 11:03 · ABONE</b><s>2 sa 35 dk</s></div>
-          <div class="act" style="background:#10B981">Çıkış</div>
-        </div>
-        <div class="job" style="--jc:#3B82F6">
-          <div class="plate"><i>TR</i><em>81 A 4567</em></div>
-          <div class="mid"><b>Giriş 12:48</b><s>50 dk</s></div>
-          <div class="act" style="background:#3B82F6">Çıkış</div>
-        </div>
-        <div class="newjob" style="background:linear-gradient(90deg,#3B82F6,#2563EB);box-shadow:0 6px 14px rgba(59,130,246,.35)">📷 Araç Girişi</div>
-      </div></div>
+      <!-- Gercek uygulama goruntusu (robot cekimi, 8 Agu tasarimi).
+           Dil bazli varyant hazir olunca JS asagidaki src'yi
+           /otoparkpro/shots/telefon-panel-<dil>.jpg ile degistirecek. -->
+      <img class="phone-real" id="op-phone-img"
+           src="/otoparkpro/shots/telefon-panel.jpg"
+           alt="OtoparkPro panel ekranı" loading="lazy"
+           width="331" height="720">
     </div>
     <div class="prod-copy rv">
       <div class="prod-eye" data-i18n="op.eye">🅿️ OtoparkPro · Otopark işletmecileri için</div>
