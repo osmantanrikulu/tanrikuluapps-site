@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Doluluk Panosu — OtoparkPro</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<meta name="theme-color" content="#1E3A8A">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+       background:#0F1E45;color:#fff;min-height:100vh;display:flex;
+       flex-direction:column}
+  header{display:flex;align-items:center;gap:16px;padding:24px 32px;
+         background:rgba(255,255,255,.06)}
+  header img{width:52px;height:52px;border-radius:12px}
+  header .name{font-size:clamp(20px,3vw,34px);font-weight:800}
+  header .sub{font-size:clamp(13px,1.6vw,18px);color:#93C5FD}
+  header .clock{margin-left:auto;font-size:clamp(20px,3vw,34px);
+                font-weight:700;font-variant-numeric:tabular-nums}
+  main{flex:1;display:flex;align-items:stretch;gap:0}
+  .free{flex:1.2;display:flex;flex-direction:column;align-items:center;
+        justify-content:center;gap:8px}
+  .free .label{font-size:clamp(18px,3vw,36px);letter-spacing:.2em;
+               color:#93C5FD;font-weight:700}
+  .free .count{font-size:clamp(90px,22vw,300px);font-weight:800;
+               line-height:1;font-variant-numeric:tabular-nums}
+  .free .count.full{color:#F87171}
+  .free .of{font-size:clamp(14px,2vw,22px);color:#94A3B8}
+  .tariffs{flex:1;background:rgba(255,255,255,.05);padding:4vh 3vw;
+           display:flex;flex-direction:column;justify-content:center}
+  .tariffs h2{font-size:clamp(16px,2.2vw,26px);letter-spacing:.15em;
+              color:#93C5FD;margin-bottom:2vh}
+  .row{display:flex;justify-content:space-between;
+       font-size:clamp(18px,2.6vw,32px);font-weight:600;
+       padding:1.2vh 0;border-bottom:1px solid rgba(255,255,255,.12)}
+  .row .price{font-weight:800;font-variant-numeric:tabular-nums}
+  .note{margin-top:2vh;font-size:clamp(13px,1.6vw,18px);color:#94A3B8}
+  footer{padding:14px 32px;display:flex;justify-content:space-between;
+         font-size:clamp(12px,1.4vw,16px);color:#64748B}
+  #err{display:none;padding:40px;text-align:center;font-size:20px;
+       color:#FCA5A5}
+</style>
+</head>
+<body>
+<header>
+  <img src="/otoparkpro/icon.png" alt="">
+  <div><div class="name" id="lotname">—</div>
+       <div class="sub" id="bizname"></div></div>
+  <div class="clock" id="clock"></div>
+</header>
+<div id="err"></div>
+<main id="main">
+  <div class="free">
+    <div class="label" id="l-free">BOŞ YER</div>
+    <div class="count" id="free">—</div>
+    <div class="of" id="of"></div>
+  </div>
+  <div class="tariffs">
+    <h2 id="l-tariff">TARİFE</h2>
+    <div id="rows"></div>
+    <div class="note" id="note"></div>
+  </div>
+</main>
+<footer>
+  <span>OtoparkPro</span><span>tanrikuluapps.com</span>
+</footer>
+<script src="/otoparkpro/fee.js"></script>
+<script>
+// Kulube TV'si icin doluluk panosu. Acilis:
+//   /otoparkpro/pano/?lot=<sube-id>
+// Veri public_lot_board gorunumunden gelir (yalniz is_public subeler);
+// 30 sn'de bir tazelenir — TV'de acik unutulmaya dayanikli.
+const SUPA = 'https://itjslckrcplrbjurwvtz.supabase.co';
+const KEY  = 'sb_publishable_xBlCzeWSSb2Np9pToL-y7w_9L6SRLLj';
+
+const q = new URLSearchParams(location.search);
+const lot = q.get('lot');
+const lang = (q.get('lang') || 'tr').slice(0,2);
+const T = {
+  tr: {free:'BOŞ YER', tariff:'TARİFE', upTo:'dk’ya kadar', over:'ve üzeri',
+       grace:'İlk {m} dk ücretsiz', cap:'Günlük tavan {p}',
+       full:'DOLU', err:'Pano bulunamadı. Bağlantıyı kontrol edin.'},
+  en: {free:'FREE SPOTS', tariff:'RATES', upTo:'up to {m} min', over:'and over',
+       grace:'First {m} min free', cap:'Daily cap {p}',
+       full:'FULL', err:'Board not found. Check the link.'},
+};
+const L = T[lang] || T.tr;
+document.getElementById('l-free').textContent = L.free;
+document.getElementById('l-tariff').textContent = L.tariff;
+
+function tick(){
+  document.getElementById('clock').textContent =
+    new Date().toLocaleTimeString(lang==='tr'?'tr-TR':'en-GB',
+        {hour:'2-digit',minute:'2-digit'});
+}
+tick(); setInterval(tick, 10000);
+
+async function load(){
+  try{
+    const r = await fetch(`${SUPA}/rest/v1/public_lot_board?id=eq.${encodeURIComponent(lot)}&select=*`,
+        {headers:{apikey:KEY}});
+    const rows = await r.json();
+    if(!Array.isArray(rows) || !rows.length) throw 0;
+    const b = rows[0];
+    document.getElementById('lotname').textContent = b.name;
+    document.getElementById('bizname').textContent = b.business_name;
+    const free = b.capacity == null ? null : Math.max(0, b.capacity - b.occupied);
+    const el = document.getElementById('free');
+    if (free == null) { el.textContent = '∞'; }
+    else if (free === 0) { el.textContent = L.full; el.classList.add('full'); }
+    else { el.textContent = free; el.classList.remove('full'); }
+    document.getElementById('of').textContent =
+        b.capacity == null ? '' : `${b.occupied} / ${b.capacity}`;
+    const rowsEl = document.getElementById('rows');
+    rowsEl.innerHTML = '';
+    const t = b.tariff;
+    if (t && t.brackets) {
+      for (const br of t.brackets) {
+        const d = document.createElement('div'); d.className='row';
+        const lbl = br.up_to_minutes == null ? L.over
+            : L.upTo.replace('{m}', br.up_to_minutes);
+        d.innerHTML = `<span>${lbl}</span><span class="price">${kurusToTl(br.price_kurus)}</span>`;
+        rowsEl.appendChild(d);
+      }
+      const notes = [];
+      if (t.grace_minutes) notes.push(L.grace.replace('{m}', t.grace_minutes));
+      if (t.daily_cap_kurus) notes.push(L.cap.replace('{p}', kurusToTl(t.daily_cap_kurus)));
+      document.getElementById('note').textContent = notes.join(' · ');
+    }
+  }catch(e){
+    document.getElementById('main').style.display='none';
+    const err = document.getElementById('err');
+    err.style.display='block'; err.textContent = L.err;
+  }
+}
+load(); setInterval(load, 30000);
+</script>
+</body>
+</html>
