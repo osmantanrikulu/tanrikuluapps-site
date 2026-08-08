@@ -79,7 +79,7 @@ const q = new URLSearchParams(location.search);
 const lot = q.get('lot');
 const lang = (q.get('lang') || 'tr').slice(0,2);
 const T = {
-  tr: {free:'BOŞ YER', tariff:'TARİFE', upTo:'dk’ya kadar', over:'ve üzeri',
+  tr: {free:'BOŞ YER', tariff:'TARİFE', upTo:'{m} dk’ya kadar', over:'ve üzeri',
        grace:'İlk {m} dk ücretsiz', cap:'Günlük tavan {p}',
        full:'DOLU', err:'Pano bulunamadı. Bağlantıyı kontrol edin.'},
   en: {free:'FREE SPOTS', tariff:'RATES', upTo:'up to {m} min', over:'and over',
