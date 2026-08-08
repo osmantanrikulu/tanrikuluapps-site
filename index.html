@@ -248,6 +248,10 @@
                  align-items:center;justify-content:center;font-style:normal;font-weight:800;font-size:12px}
   .gauge .ring i s{text-decoration:none;font-size:6.5px;opacity:.7;font-weight:600;letter-spacing:.6px}
 
+  /* Tablet gorseli: gercek ekran goruntusu, ince cerceveyle. */
+  .tablet-wrap{max-width:880px;margin:72px auto 0;text-align:center;padding:0 4px}
+  .tablet-shot{width:100%;border-radius:18px;box-shadow:0 0 0 8px #0f172a,0 0 0 9px #1e293b,0 30px 70px rgba(2,20,27,.35)}
+  .tablet-cap{margin-top:22px;font-size:14px;color:var(--muted)}
   /* ---------- TV panosu vitrini ---------- */
   .tvsec{padding:110px 24px}
   .tv-in{max-width:1040px;margin:0 auto;display:grid;grid-template-columns:.95fr 1fr;gap:64px;align-items:center}
@@ -300,6 +304,12 @@
   .qr-card .qeta{background:#F2F7F9;border-radius:14px;padding:10px;margin-top:12px}
   .qr-card .qeta b{display:block;font-size:20px;color:var(--teal)}
   .qr-card .qeta s{text-decoration:none;font-size:9.5px;color:#64748B;letter-spacing:.5px;font-weight:700}
+
+  .tab-shot{max-width:720px;margin:64px auto 0;padding:0 8px;text-align:center}
+  .tab-shot img{width:100%;height:auto;border-radius:22px;border:1px solid var(--hair);
+                box-shadow:0 18px 44px rgba(15,42,110,.16)}
+  .tab-shot p{margin-top:16px;font-size:13.5px;color:var(--muted);line-height:1.6}
+  .tab-shot b{color:var(--ink);font-size:15px}
 
   /* ---------- OtoparkPro vitrin/makbuz varyantlari (navy palet) ---------- */
   .opk .qr-step i{background:#1D4ED8}
@@ -388,7 +398,7 @@
   <h1 class="rv" data-i18n-html="hero.h1">İşletmen artık<br><span class="grad">cebinde.</span></h1>
   <p class="rv" data-i18n="hero.p">Araç yıkamacılar ve otopark işletmecileri için profesyonel mobil yönetim: aracı saniyeler içinde kaydet, kasanı anlık gör, müşterini bekletmeden bilgilendir. Defter biter, tahmin biter — iş sana kalır.</p>
   <div class="hero-cta rv">
-    <a class="btn btn-teal" href="/washpro/get/" data-i18n="dl.wash">💧 WashPro'yu İndir</a>
+    <a class="btn btn-teal" href="/washpro/get/"><img src="/washpro/icon-256.png" alt="" style="width:16px;height:16px;border-radius:4px;vertical-align:-3px"> <span data-i18n="dl.wash">WashPro'yu İndir</span></a>
     <a class="btn btn-ghost" href="/otoparkpro/get/" data-i18n="dl.park">🅿️ OtoparkPro'yu İndir</a>
   </div>
   <div class="hero-note rv" data-i18n="hero.note">iOS ve Android · İnternetsiz de çalışır · 27 dil</div>
@@ -453,7 +463,7 @@
 <section class="product" id="washpro">
   <div class="prod-in">
     <div class="prod-copy rv">
-      <div class="prod-eye" data-i18n="wp.eye">💧 WashPro · Araç yıkama işletmeleri için</div>
+      <div class="prod-eye"><img src="/washpro/icon-256.png" alt="" style="width:18px;height:18px;border-radius:5px"><span data-i18n="wp.eye">WashPro · Araç yıkama işletmeleri için</span></div>
       <h2 data-i18n="wp.h2">Yıkamacının cebindeki patron.</h2>
       <p class="lead" data-i18n="wp.lead">Kuyruktan teslime her araç tek panoda. Sen işine bak, takibi WashPro yapsın.</p>
       <div class="benefits">
@@ -494,7 +504,7 @@
     </div>
     <div class="phone-wrap rv">
       <div class="wmock" lang="tr" aria-hidden="true">
-        <div class="wh">💧 Merkez</div>
+        <div class="wh"><img src="/washpro/poster/mark.png" alt="" style="height:14px;width:auto;vertical-align:-2px"> Merkez</div>
         <div class="wpills">
           <span class="wp" style="background:rgba(34,211,238,.28)"><b>2</b><s>İŞLEMDE</s></span>
           <span class="wp" style="background:rgba(52,211,153,.28)"><b>1</b><s>HAZIR</s></span>
@@ -536,6 +546,10 @@
       </div></div>
     </div>
   </div>
+  <div class="tablet-wrap rv">
+    <img class="tablet-shot" src="/washpro/tablet-board.png" alt="WashPro tablet" loading="lazy">
+    <p class="tablet-cap" data-i18n="wp.tablet">iPad ve Android tablette tam pano: dört durum sütunu yan yana, detay sağda panelde.</p>
+  </div>
 </section>
 
 <!-- ================= QR canli takip ================= -->
@@ -557,7 +571,7 @@
     </div>
     <div class="qr-card-wrap rv">
       <div class="qr-card" lang="tr">
-        <div class="qbrand">💧 WASHPRO</div>
+        <div class="qbrand"><img src="/washpro/poster/mark.png" alt="" style="height:14px;width:auto;vertical-align:-2px"> WASHPRO</div>
         <div class="qplate"><i>TR</i><em>34 ABC 123</em></div>
         <div class="qsteps">
           <div class="qdot done">✓</div><div class="qbar done"></div>
@@ -577,7 +591,7 @@
   <div class="tv-in">
     <div class="tv-mock-wrap rv">
       <div class="tv-mock" lang="tr" aria-hidden="true">
-        <div class="tvh"><s>💧 WASHPRO</s><b>15:42</b></div>
+        <div class="tvh"><s><img src="/washpro/poster/mark.png" alt="" style="height:14px;width:auto;vertical-align:-2px"> WASHPRO</s><b>15:42</b></div>
         <div class="tvb">
           <div class="tvc"><h4><i style="background:#94A3B8"></i>KUYRUKTA</h4>
             <div class="tvj"><b>16 BC 4455</b><s>16:45</s></div>
@@ -604,7 +618,7 @@
       </div>
       <div class="qr-note" data-i18n="tv.note">Kurulum tek seferlik: TV kalıcı olarak işletmenin ekranı olur.</div>
       <div class="pill-row" style="margin-top:18px">
-        <a class="btn btn-main" href="/washpro/pano/">tanrikuluapps.com/washpro/pano →</a>
+        <a class="btn btn-main" href="/washpro/pano/" target="_blank" rel="noopener" data-i18n="tv.try">Panoyu tarayıcıda dene →</a>
       </div>
     </div>
   </div>
@@ -689,6 +703,11 @@
       </div>
     </div>
   </div>
+  <div class="tab-shot rv">
+    <img src="/otoparkpro/shots/tablet-panel.jpg" alt="OtoparkPro tablet paneli" loading="lazy" width="1400" height="1867">
+    <p><b data-i18n="op.tabT">Tablette telefon kopyası değil, ayrı düzen</b><br>
+       <span data-i18n="op.tabS">iPad ve Android tabletlerde panel iki bölmeli çalışır: solda menü rayı, sağda geniş araç ızgarası — kulübe tezgâhı için tasarlandı.</span></p>
+  </div>
 </section>
 
 <!-- ================= OtoparkPro vitrin panosu ================= -->
@@ -764,7 +783,7 @@
   <p class="sec-sub rv" data-i18n="fam.s">Her Tanrikulu Apps ürünü aynı sağlam temel üzerinde yükselir: internetsiz çalışma, bulut yedeği, rol bazlı yetki ve plaka zekâsı.</p>
   <div class="future-grid rv">
     <div class="prod-card">
-      <div class="app-ico" style="background:#E0F5FA">💧</div>
+      <div class="app-ico" style="background:#E0F5FA"><img src="/washpro/icon-256.png" alt="WashPro" style="width:100%;height:100%;border-radius:inherit"></div>
       <h3>WashPro</h3>
       <p data-i18n="fam.wp">Araç yıkama ve detaylı temizlik işletmeleri için kuyruk, sadakat ve prim yönetimi.</p>
       <a href="/washpro/get/" data-i18n="fam.dl">İndir →</a>
@@ -789,7 +808,7 @@
   <h2 class="rv" data-i18n-html="fin.h2">Bugün kur.<br>Bu akşam kasanı cepten kapat.</h2>
   <p class="rv" data-i18n="fin.p">Kurulum dakikalar sürer; kayıt defterine bir daha dönmezsin.</p>
   <div class="hero-cta rv">
-    <a class="btn btn-teal" href="/washpro/get/" data-i18n="dl.wash3">💧 WashPro'yu İndir</a>
+    <a class="btn btn-teal" href="/washpro/get/"><img src="/washpro/icon-256.png" alt="" style="width:16px;height:16px;border-radius:4px;vertical-align:-3px"> <span data-i18n="dl.wash3">WashPro'yu İndir</span></a>
     <a class="btn btn-ghost" href="/otoparkpro/get/" data-i18n="dl.park3">🅿️ OtoparkPro'yu İndir</a>
   </div>
 </div>
