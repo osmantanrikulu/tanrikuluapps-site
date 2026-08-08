@@ -252,6 +252,8 @@
   .tablet-wrap{max-width:880px;margin:72px auto 0;text-align:center;padding:0 4px}
   .tablet-shot{width:100%;border-radius:18px;box-shadow:0 0 0 8px #0f172a,0 0 0 9px #1e293b,0 30px 70px rgba(2,20,27,.35)}
   .tablet-cap{margin-top:22px;font-size:14px;color:var(--muted)}
+  /* Telefon icin de GERCEK ekran goruntusu (maket eskiyordu). */
+  .phone-shot{width:100%;height:100%;object-fit:cover;object-position:top;border-radius:inherit;display:block}
   /* ---------- TV panosu vitrini ---------- */
   .tvsec{padding:110px 24px}
   .tv-in{max-width:1040px;margin:0 auto;display:grid;grid-template-columns:.95fr 1fr;gap:64px;align-items:center}
@@ -513,36 +515,7 @@
         <div class="wi"><s>BUGÜN</s>₺4.250</div>
       </div>
       <div class="phone"><div class="screen scr-wash">
-        <div class="wash-head">
-          <div class="notch"><i></i></div>
-          <div class="wash-title"><img src="/washpro/poster/mark.png" alt=""> WashPro</div>
-          <div class="stats">
-            <div class="stat"><s>BUGÜNKÜ GELİR</s><b>₺4.250</b></div>
-            <div class="stat"><s>YIKANAN</s><b>2</b></div>
-            <div class="stat"><s>TESLİM</s><b>9</b></div>
-          </div>
-        </div>
-        <div class="chips">
-          <span class="chip" style="background:#E5E9EF;color:#64748B">Kuyrukta 1</span>
-          <span class="chip" style="background:#DDF6FB;color:#0891B2">İşlemde 2</span>
-          <span class="chip" style="background:#DCF7EC;color:#0A9D6C">Hazır 1</span>
-        </div>
-        <div class="wjob" style="--jc:#10B981">
-          <div class="wtop"><span class="plate"><i>TR</i><em>34 ABC 123</em></span><b class="wprice">₺400</b></div>
-          <b class="wsvc">İç-Dış Yıkama</b>
-          <div class="wbot"><s>Hazır: 12 dk</s><span class="act" style="background:#F59E0B">Teslim et</span></div>
-        </div>
-        <div class="wjob" style="--jc:#06B6D4">
-          <div class="wtop"><span class="plate"><i>TR</i><em>06 KLM 42</em></span><b class="wprice">₺1.500</b></div>
-          <b class="wsvc">Detaylı Temizlik</b>
-          <div class="wbot"><s>İşlemde: 35 dk</s><span class="act">Hazır</span></div>
-        </div>
-        <div class="wjob" style="--jc:#64748B">
-          <div class="wtop"><span class="plate"><i>TR</i><em>35 OTO 55</em></span><b class="wprice">₺250</b></div>
-          <b class="wsvc">Dış Yıkama</b>
-          <div class="wbot"><s>Tahmini teslim ~16:40</s><span class="act" style="background:#64748B">Başlat</span></div>
-        </div>
-        <div class="newjob">📷 Yeni İş</div>
+        <img class="phone-shot" src="/washpro/phone-board.png" alt="WashPro pano" loading="lazy">
       </div></div>
     </div>
   </div>
