@@ -206,6 +206,16 @@
   .chip{border-radius:999px;padding:4px 9px;font-weight:700;font-size:8px}
   .job{background:#fff;border-radius:13px;margin:3px 11px;padding:9px;display:flex;align-items:center;gap:8px;
        border:1px solid #E2EDF1;border-left:4px solid var(--jc,#06B6D4)}
+  /* WashPro maketi: uygulamanin 8 Agu kart duzeni (plaka ustte). */
+  .wjob{background:#fff;border-radius:13px;margin:3px 11px;padding:8px 9px;
+        border:1px solid #E2EDF1;border-left:4px solid var(--jc,#06B6D4)}
+  .wjob .wtop{display:flex;justify-content:space-between;align-items:center}
+  .wjob .wprice{font-size:9px;color:#F59E0B;font-weight:800}
+  .wjob .wsvc{display:block;font-size:9px;margin-top:3px}
+  .wjob .wbot{display:flex;justify-content:space-between;align-items:center;margin-top:3px}
+  .wjob .wbot s{text-decoration:none;color:var(--jc,#06B6D4);font-size:7.5px;font-weight:600}
+  .wjob .act{background:var(--jc,#06B6D4);color:#fff;border-radius:999px;padding:3px 9px;font-weight:700;font-size:8px}
+  .wash-title img{height:15px;width:auto;vertical-align:-3px}
   .plate{background:#fff;border:1.3px solid #111;border-radius:3px;font-weight:800;font-size:8px;display:flex;overflow:hidden}
   .plate i{background:#003399;color:#fff;font-style:normal;padding:2px 3px;font-size:6.5px;display:flex;align-items:center}
   .plate em{font-style:normal;padding:2px 5px;letter-spacing:.5px}
@@ -443,7 +453,7 @@
       <div class="phone"><div class="screen scr-wash">
         <div class="wash-head">
           <div class="notch"><i></i></div>
-          <div class="wash-title">🚿 WashPro</div>
+          <div class="wash-title"><img src="/washpro/poster/mark.png" alt=""> WashPro</div>
           <div class="stats">
             <div class="stat"><s>BUGÜNKÜ GELİR</s><b>₺4.250</b></div>
             <div class="stat"><s>YIKANAN</s><b>2</b></div>
@@ -452,23 +462,23 @@
         </div>
         <div class="chips">
           <span class="chip" style="background:#E5E9EF;color:#64748B">Kuyrukta 1</span>
-          <span class="chip" style="background:#DDF6FB;color:#0891B2">Yıkanıyor 2</span>
+          <span class="chip" style="background:#DDF6FB;color:#0891B2">İşlemde 2</span>
           <span class="chip" style="background:#DCF7EC;color:#0A9D6C">Hazır 1</span>
         </div>
-        <div class="job" style="--jc:#10B981">
-          <div class="plate"><i>TR</i><em>34 ABC 123</em></div>
-          <div class="mid"><b>İç-Dış Yıkama</b><s>Hazır: 12 dk</s></div>
-          <div class="act" style="background:#F59E0B">Teslim et</div>
+        <div class="wjob" style="--jc:#10B981">
+          <div class="wtop"><span class="plate"><i>TR</i><em>34 ABC 123</em></span><b class="wprice">₺400</b></div>
+          <b class="wsvc">İç-Dış Yıkama</b>
+          <div class="wbot"><s>Hazır: 12 dk</s><span class="act" style="background:#F59E0B">Teslim et</span></div>
         </div>
-        <div class="job" style="--jc:#06B6D4">
-          <div class="plate"><i>TR</i><em>06 KLM 42</em></div>
-          <div class="mid"><b>Detaylı Temizlik</b><s>Yıkamada: 35 dk</s></div>
-          <div class="act">Hazır</div>
+        <div class="wjob" style="--jc:#06B6D4">
+          <div class="wtop"><span class="plate"><i>TR</i><em>06 KLM 42</em></span><b class="wprice">₺1.500</b></div>
+          <b class="wsvc">Detaylı Temizlik</b>
+          <div class="wbot"><s>İşlemde: 35 dk</s><span class="act">Hazır</span></div>
         </div>
-        <div class="job" style="--jc:#64748B">
-          <div class="plate"><i>TR</i><em>35 OTO 55</em></div>
-          <div class="mid"><b>Motor Yıkama</b><s>Tahmini teslim ~16:40</s></div>
-          <div class="act" style="background:#64748B">Başlat</div>
+        <div class="wjob" style="--jc:#64748B">
+          <div class="wtop"><span class="plate"><i>TR</i><em>35 OTO 55</em></span><b class="wprice">₺250</b></div>
+          <b class="wsvc">Dış Yıkama</b>
+          <div class="wbot"><s>Tahmini teslim ~16:40</s><span class="act" style="background:#64748B">Başlat</span></div>
         </div>
         <div class="newjob">📷 Yeni İş</div>
       </div></div>
