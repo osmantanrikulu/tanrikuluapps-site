@@ -37,7 +37,9 @@ last_activity_at timestamptz
 
 Kurallar:
 - Yalnız işletmenin **açık onay** verdiği yerler (is_public) listelenir.
-- Plaka, tutar, müşteri verisi ASLA bu görünümden çıkmaz.
+- Plaka, MÜŞTERİ İŞLEM tutarı ve müşteri verisi ASLA çıkmaz; `detail`
+  içindeki fiyat listesi/tarife halka açık tabela bilgisidir ve çıkar
+  (WashPro şerhi 2 — bu ayrım bilinçli).
 - `detail` dikeye özeldir; harita katmanı onu yorumlamak zorunda değildir
   (gösterirse gösterir).
 - Tüketici (harita/pano) iki projeye ayrı istek atar ve `type` ile
@@ -96,10 +98,17 @@ ekranına `type=parking` gri ikincil pin katmanı (WashPro görev #45,
   ('exterior', 'interiorExterior'…) — gösterilecekse çevrilmeli ya da
   ham bırakılmalı; WashPro içi çeviri tablosu `serviceName()` (Dart).
 
-**OtoparkPro (beklenen — onların #34):**
+**OtoparkPro (HAZIR — migration 0013, Osman uygulayınca canlı):**
 - Proje: `https://itjslckrcplrbjurwvtz.supabase.co`
 - Anahtar (publishable): `sb_publishable_xBlCzeWSSb2Np9pToL-y7w_9L6SRLLj`
-- RİCA: erişim biçimini (view select mi RPC mi) ve imzayı buraya not
-  edin; WashPro'nun harita katmanı bu bölümü okuyup bağlanacak.
-  Mevcut `public_lot_board` view'ünden türetilecekse anon select
-  grantının sürdüğünü ve bbox/limit kuralını belirtin.
+- Erişim: RPC — `POST /rest/v1/rpc/public_places_v1` gövde
+  `{"lat":.., "lng":..}` — **WashPro ile birebir aynı imza**; tüketici
+  iki uca aynı kodla bağlanır. (public_lot_board view'ü pano için ayrı
+  yaşamaya devam eder, harita katmanı ONU KULLANMAZ.)
+- Dönen: jsonb dizi `{id, type:'parking', name(şube),
+  business_name(tenant), lat, lng, capacity, busy(içerideki araç),
+  detail:{grace_minutes, daily_cap_kurus, brackets:[{up_to_minutes,
+  price_kurus}]}, last_activity_at}` — mesafe sıralı.
+- Bbox: lat ±1°, lng ±1.5°; en yakın 50 (WashPro ile aynı).
+- DİKKAT: `detail` yıkamadaki gibi hizmet listesi DEĞİL, tarife
+  nesnesi — tüketici `type`'a göre yorumlar (sözleşme kuralı).
