@@ -311,8 +311,9 @@
   .phone-real{width:min(310px,78vw);height:auto;border-radius:34px;
               border:6px solid #0f172a;box-shadow:0 24px 54px rgba(15,42,110,.30)}
   .tab-shot{max-width:880px;margin:64px auto 0;padding:0 8px;text-align:center}
-  .tab-shot img{width:100%;height:auto;border-radius:22px;border:1px solid var(--hair);
-                box-shadow:0 18px 44px rgba(15,42,110,.16)}
+  /* Tablet cercevesi: telefonla ayni dil — koyu cerceve + yumusak kose. */
+  .tab-shot img{width:100%;height:auto;border-radius:30px;border:12px solid #0f172a;
+                background:#0f172a;box-shadow:0 24px 54px rgba(15,42,110,.28)}
   .tab-shot p{margin-top:16px;font-size:13.5px;color:var(--muted);line-height:1.6}
   .tab-shot b{color:var(--ink);font-size:15px}
 
@@ -857,6 +858,15 @@
     if (ogu) ogu.setAttribute('content', canon);
     var sel = document.getElementById('langSel');
     if (sel) sel.value = lang;
+    // Ekran goruntuleri: gercek arayuz gorseli o dilde varsa o, yoksa
+    // Ingilizce (farkli alfabeli 9 dil goruntu dalgasinda tamamlanacak).
+    var SHOT = ['tr','en','de','es','fr','it','pt','nl','sv','pl','cs',
+                'ro','az','id','vi','ru','uk','el'];
+    var sl = SHOT.indexOf(lang) >= 0 ? lang : 'en';
+    var ps = document.querySelector('.phone-shot');
+    if (ps) ps.src = '/washpro/i/phone-' + sl + '.png';
+    var ts = document.querySelector('.tablet-shot');
+    if (ts) ts.src = '/washpro/i/tablet-' + sl + '.png';
   }
   var sel = document.getElementById('langSel');
   SUP.forEach(function(l){
