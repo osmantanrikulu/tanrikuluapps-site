@@ -165,3 +165,33 @@ Elle yapılacaklar (API açamaz):
 Sonrası otomatik: metinler, görseller, build yükleme, sürüm oluşturma.
 
 Ayrıca bkz. [ALTYAPI.md](ALTYAPI.md) — alan adı, e-posta, site düzeni.
+
+## TestFlight'a Xcode'suz yükleme (8 Ağu 2026'da çözüldü)
+
+Oturum, kullanıcıya Organizer tıklatmadan TestFlight'a build basabilir.
+Üç adım (OtoparkPro'da doğrulandı; WashPro da aynı yolu kullanır):
+
+```bash
+# 1) Arşiv (flutter'ın kendi IPA export'u düşebilir, sorun değil)
+flutter build ipa   # build/ios/archive/Runner.xcarchive üretir
+
+# 2) Export — KRİTİK: signingCertificate "Apple Distribution"
+#    (anahtar zincirindeki YEREL sertifika; belirtilmezse xcodebuild
+#    bulut yönetimli sertifikaya gider ve API anahtarlarında o izin
+#    olmadığı için "Cloud signing permission error" düşer)
+plutil -replace signingCertificate -string "Apple Distribution" eo.plist
+xcodebuild -exportArchive -archivePath build/ios/archive/Runner.xcarchive \
+  -exportPath out -exportOptionsPlist eo.plist -allowProvisioningUpdates \
+  -authenticationKeyPath ~/.appstoreconnect/private_keys/AuthKey_<ID>.p8 \
+  -authenticationKeyID <ID> -authenticationKeyIssuerID <ISSUER>
+
+# 3) Yükle
+xcrun altool --upload-app -f out/*.ipa -t ios \
+  --apiKey <ID> --apiIssuer <ISSUER>
+```
+
+Notlar: eo.plist tabanı, daha önceki başarılı bir export'un
+ExportOptions.plist'i (method app-store-connect, signingStyle
+automatic). API anahtarı profil üretebilir (-allowProvisioningUpdates)
+ama bulut sertifikası YÖNETEMEZ — yerel sertifika bu yüzden şart.
+Sertifika süresi dolarsa (31 Tem 2027) Xcode'la bir kez yenilenir.
