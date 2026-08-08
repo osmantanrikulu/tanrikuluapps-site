@@ -107,7 +107,8 @@
   nav{position:sticky;top:0;z-index:50;backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);
       background:rgba(255,255,255,.78);border-bottom:1px solid rgba(0,0,0,.06)}
   .nav-in{max-width:1040px;margin:0 auto;height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 24px}
-  .brand{display:flex;align-items:baseline;gap:10px}
+  .brand{display:flex;align-items:center;gap:10px}
+  .brand img{width:26px;height:26px}
   .brand b{font-weight:700;font-size:16px;letter-spacing:-.3px}
   .brand span{font-size:11px;color:var(--faint);font-weight:500}
   .nav-links{display:flex;align-items:center;gap:24px;font-size:13px;color:var(--muted)}
@@ -385,7 +386,7 @@
 
 <nav>
   <div class="nav-in">
-    <a class="brand" href="/"><b>Tanrikulu Apps</b><span data-i18n="nav.tag">işletme uygulamaları</span></a>
+    <a class="brand" href="/"><img src="/icons/icon-192.png" alt=""><b>Tanrikulu Apps</b><span data-i18n="nav.tag">işletme uygulamaları</span></a>
     <div class="nav-links">
       <a href="#washpro">WashPro</a>
       <a href="#otoparkpro">OtoparkPro</a>
