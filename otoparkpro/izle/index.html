@@ -48,6 +48,7 @@
   <div id="err"></div>
 </div>
 <script src="/otoparkpro/fee.js"></script>
+<script src="/otoparkpro/page-i18n.js"></script>
 <script>
 // Makbuz sayfasi: fisteki QR buraya acilir (?t=<jeton>).
 // Musteri aracinin giris saatini ve ISLEYEN ucreti canli gorur;
@@ -58,19 +59,8 @@ const KEY  = 'sb_publishable_xBlCzeWSSb2Np9pToL-y7w_9L6SRLLj';
 
 const q = new URLSearchParams(location.search);
 const lang = (q.get('lang') || navigator.language || 'tr').slice(0,2);
-const T = {
-  tr: {en:'GİRİŞ', dur:'SÜRE', fee:'İŞLEYEN ÜCRET', feeDone:'ÖDENEN ÜCRET',
-       note:'Ücret, tarifeye göre canlı hesaplanır; çıkışta görevlinin ekranındaki tutar geçerlidir.',
-       noteDone:'Aracınız çıkış yaptı. İyi yolculuklar!',
-       err:'Kayıt bulunamadı. Fişteki QR kodu yeniden okutun.',
-       hours:' sa ', mins:' dk'},
-  en: {en:'ENTRY', dur:'DURATION', fee:'RUNNING FEE', feeDone:'PAID FEE',
-       note:'The fee is calculated live from the tariff; the amount on the attendant\'s screen at exit is final.',
-       noteDone:'Your vehicle has left. Safe travels!',
-       err:'Record not found. Rescan the QR on your receipt.',
-       hours:' h ', mins:' min'},
-};
-const L = T[lang] || T.en;
+// Ceviriler ortak dosyada: /otoparkpro/page-i18n.js (27 dil).
+const L = (PAGE_I18N[lang] || PAGE_I18N.en).izle;
 document.getElementById('l-in').textContent = L.en;
 document.getElementById('l-dur').textContent = L.dur;
 

@@ -51,6 +51,7 @@
     <p class="sub" data-i="doneSub"></p>
   </div>
 </div>
+<script src="/otoparkpro/page-i18n.js"></script>
 <script>
 // OtoparkPro Supabase projesi; anahtar istemciye acik turden
 // (uygulamada da gomulu). Sifre buradan Supabase'e HTTPS ile gider,
@@ -58,24 +59,11 @@
 const SUPA = 'https://itjslckrcplrbjurwvtz.supabase.co';
 const KEY  = 'sb_publishable_xBlCzeWSSb2Np9pToL-y7w_9L6SRLLj';
 
-const T = {
-  tr: {title:'Yeni şifre belirle', sub:'OtoparkPro hesabın için yeni bir şifre seç.',
-       l1:'Yeni şifre (en az 8 karakter)', l2:'Yeni şifre (tekrar)', btn:'Şifreyi Kaydet',
-       mismatch:'Şifreler birbirini tutmuyor.', short:'Şifre en az 8 karakter olmalı.',
-       expired:'Bağlantının süresi dolmuş ya da daha önce kullanılmış. Uygulamadan yeni bir şifre sıfırlama bağlantısı iste.',
-       fail:'Şifre kaydedilemedi: ', doneTitle:'Şifren güncellendi',
-       doneSub:'Uygulamaya dönüp yeni şifrenle giriş yapabilirsin.'},
-  en: {title:'Set a new password', sub:'Choose a new password for your OtoparkPro account.',
-       l1:'New password (min 8 characters)', l2:'New password (repeat)', btn:'Save Password',
-       mismatch:'Passwords do not match.', short:'Password must be at least 8 characters.',
-       expired:'This link has expired or was already used. Request a new reset link from the app.',
-       fail:'Could not save the password: ', doneTitle:'Password updated',
-       doneSub:'Return to the app and sign in with your new password.'},
-};
+// Ceviriler ortak dosyada: /otoparkpro/page-i18n.js (27 dil).
 const q = new URLSearchParams(location.search);
 const lang = (q.get('lang') || navigator.language || 'en').slice(0,2);
-const L = T[lang] || T.en;
-document.documentElement.lang = T[lang] ? lang : 'en';
+const L = (PAGE_I18N[lang] || PAGE_I18N.en).reset;
+document.documentElement.lang = PAGE_I18N[lang] ? lang : 'en';
 document.querySelectorAll('[data-i]').forEach(
     el => { el.textContent = L[el.getAttribute('data-i')] ?? el.textContent; });
 

@@ -90,6 +90,7 @@
   </div>
 </footer>
 <script src="/otoparkpro/fee.js"></script>
+<script src="/otoparkpro/page-i18n.js"></script>
 <script>
 // Kulube TV'si icin doluluk panosu. Acilis:
 //   /otoparkpro/pano/?lot=<sube-id>
@@ -101,22 +102,9 @@ const KEY  = 'sb_publishable_xBlCzeWSSb2Np9pToL-y7w_9L6SRLLj';
 const q = new URLSearchParams(location.search);
 // Oncelik: adresteki lot > TV'nin hatirladigi lot > eslestirme ekrani.
 let lot = q.get('lot') || localStorage.getItem('otopark_pano_lot');
-const lang = (q.get('lang') || 'tr').slice(0,2);
-const T = {
-  tr: {free:'BOŞ YER', tariff:'TARİFE', upTo:'{m} dk’ya kadar', over:'ve üzeri',
-       grace:'İlk {m} dk ücretsiz', cap:'Günlük tavan {p}',
-       full:'DOLU', err:'Pano bulunamadı. Bağlantıyı kontrol edin.',
-       how:'Bu panoyu işletmenize bağlamak için OtoparkPro uygulamasında Ayarlar → Vitrin Panosu bölümüne girin ve bu kodu yazın:',
-       wait:'Bağlantı bekleniyor…',
-       promo:'Bu pano <b>OtoparkPro</b> ile hazırlandı<br>Kendi otoparkınız için okutun'},
-  en: {free:'FREE SPOTS', tariff:'RATES', upTo:'up to {m} min', over:'and over',
-       grace:'First {m} min free', cap:'Daily cap {p}',
-       full:'FULL', err:'Board not found. Check the link.',
-       how:'To link this board to your business, open OtoparkPro → Settings → Display Board and enter this code:',
-       wait:'Waiting for pairing…',
-       promo:'This board is powered by <b>OtoparkPro</b><br>Scan for your own parking lot'},
-};
-const L = T[lang] || T.tr;
+const lang = (q.get('lang') || navigator.language || 'tr').slice(0,2);
+// Ceviriler ortak dosyada: /otoparkpro/page-i18n.js (27 dil).
+const L = (PAGE_I18N[lang] || PAGE_I18N.en).pano;
 document.getElementById('l-free').textContent = L.free;
 document.getElementById('l-tariff').textContent = L.tariff;
 // Metin bizden gelir (T sozlugu), kullanici girdisi degil.
