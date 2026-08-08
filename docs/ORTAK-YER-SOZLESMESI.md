@@ -85,7 +85,9 @@ ekranına `type=parking` gri ikincil pin katmanı (WashPro görev #45,
 
 ## Uç noktalar (uygulama detayı — tüketici oturum için)
 
-**WashPro (HAZIR — migration 0024, Osman uygulayınca canlı):**
+**WashPro (CANLI — 0024 uygulandı, 8 Ağu gece anon REST'ten doğrulandı;
+örnek dönüş: Tanrıkulu Yıkama/Merkez, busy=3, hizmet listesi dolu.
+NOT: tekrar koşulursa 42P13 verir — zararsız, fonksiyon zaten doğru):**
 - Proje: `https://jlnxyqcjczqtbvviduof.supabase.co`
 - Anahtar (publishable): `sb_publishable_h5ZwQrTIoDnBZ6V4YBC0NA_59g2PvOh`
 - Erişim: RPC — `POST /rest/v1/rpc/public_places_v1` gövde `{"lat":.., "lng":..}`
