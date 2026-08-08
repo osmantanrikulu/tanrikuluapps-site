@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Canlı Sıra — WashPro</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📺</text></svg>">
+<style>
+  /* TV panosu: bekleme salonundaki musteri ekrani. Uzaktan okunacak —
+     iri punto, koyu zemin, yuksek kontrast. Sayfa kendini 15 sn'de
+     bir tazeler; imlec gizlenir (TV'de fare goruntusu kalmasin). */
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{cursor:none}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+       background:
+         radial-gradient(90vh 90vh at 85% -10%, rgba(34,211,238,.16), transparent 60%),
+         radial-gradient(80vh 80vh at -10% 110%, rgba(14,116,144,.35), transparent 60%),
+         linear-gradient(170deg,#04191f,#082e3b 55%,#0b4a5e);
+       min-height:100vh;color:#fff;display:flex;flex-direction:column;
+       padding:2.2vh 2.2vw}
+  header{display:flex;align-items:center;gap:1.2vw;margin-bottom:2vh}
+  .mark{height:8vh;width:auto;filter:drop-shadow(0 6px 16px rgba(0,0,0,.4))}
+  .brand{font-size:1.7vh;font-weight:800;color:#7DD3FC;letter-spacing:2.5px}
+  .biz{font-size:3.6vh;font-weight:800;letter-spacing:.4px}
+  .right{margin-inline-start:auto;text-align:end}
+  .clock{font-size:4.6vh;font-weight:800;font-variant-numeric:tabular-nums;line-height:1}
+  .date{font-size:1.7vh;color:rgba(255,255,255,.6);font-weight:600;margin-top:.4vh}
+  /* Sutunlar camsi panel: kartlar bosluga degil bir zemine oturur. */
+  .cols{flex:1;display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.4vw;align-content:stretch}
+  .col{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.09);
+       border-radius:2.2vh;padding:1.4vh 1.2vh;overflow:hidden}
+  .col h2{font-size:2vh;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;
+          padding:.6vh .6vh 1.4vh;display:flex;align-items:center;gap:.6vw;
+          color:rgba(255,255,255,.85)}
+  .col h2 .n{margin-inline-start:auto;border-radius:99px;
+             min-width:3.8vh;height:3.8vh;display:flex;align-items:center;justify-content:center;
+             font-size:2.1vh;padding:0 1.2vh;background:rgba(255,255,255,.12)}
+  .dot{width:1.5vh;height:1.5vh;border-radius:50%}
+  .c-queued .dot{background:#94A3B8}
+  .c-washing .dot{background:#22D3EE;box-shadow:0 0 1.6vh rgba(34,211,238,.8)}
+  .c-ready .dot{background:#34D399;box-shadow:0 0 1.6vh rgba(52,211,153,.8)}
+  .c-washing h2 .n{background:rgba(34,211,238,.22)}
+  .c-ready h2 .n{background:rgba(52,211,153,.25)}
+  .card{background:#fff;color:#0f172a;border-radius:1.6vh;padding:1.5vh 1.5vh;margin-bottom:1.1vh;
+        display:flex;align-items:center;justify-content:space-between;gap:1vw;
+        border-inline-start:.9vh solid #94A3B8;
+        box-shadow:0 8px 22px rgba(0,0,0,.25)}
+  .c-washing .card{border-color:#06B6D4}
+  .c-ready .card{border-color:#10B981;background:#ECFDF5;
+                 animation:glow 2.4s ease-in-out infinite}
+  @keyframes glow{0%,100%{box-shadow:0 8px 22px rgba(0,0,0,.25)}
+                  50%{box-shadow:0 8px 30px rgba(16,185,129,.55)}}
+  .plate{display:inline-flex;border:.35vh solid #111;border-radius:.8vh;overflow:hidden;
+         font-weight:800;font-size:3.1vh;background:#fff;white-space:nowrap;
+         box-shadow:inset 0 -.5vh 1vh rgba(0,0,0,.06)}
+  .plate em{font-style:normal;padding:.7vh 1.3vh;letter-spacing:.3vh}
+  .eta{text-align:end}
+  .eta b{display:block;font-size:3.1vh;color:#0E7490;font-variant-numeric:tabular-nums;line-height:1.1}
+  .eta s{text-decoration:none;font-size:1.3vh;color:#64748B;letter-spacing:.6px;font-weight:700}
+  .ready-badge{font-size:2.5vh;font-weight:800;color:#059669;white-space:nowrap}
+  .empty{grid-column:1/-1;text-align:center;color:rgba(255,255,255,.85);
+         font-size:3vh;font-weight:700;align-self:center}
+  .empty s{text-decoration:none;display:block;font-size:7vh;margin-bottom:2vh}
+  .err{grid-column:1/-1;text-align:center;color:rgba(255,255,255,.7);font-size:2.4vh;align-self:center}
+  /* Eslestirme ekrani: TV kumandayla uzun adres yazilmaz — TV bu
+     karekodu gosterir, isletmeci UYGULAMADAN telefonla okutur. */
+  .pair{grid-column:1/-1;display:flex;flex-direction:column;align-items:center;
+        justify-content:center;text-align:center;align-self:center}
+  .pair-card{background:#fff;border-radius:2.6vh;padding:2.6vh;
+             box-shadow:0 0 0 1.2vh rgba(255,255,255,.07), 0 24px 70px rgba(0,0,0,.45)}
+  .pair-card > div{display:flex;justify-content:center}
+  .pair p{margin-top:2.8vh;font-size:2.5vh;font-weight:700;max-width:64vw;line-height:1.55}
+  .pair s{text-decoration:none;display:block;margin-top:1vh;font-size:1.8vh;
+          color:rgba(255,255,255,.55);letter-spacing:.5px}
+  footer{margin-top:1.6vh;font-size:1.6vh;color:rgba(255,255,255,.5);
+         display:flex;justify-content:space-between;align-items:flex-end}
+  /* Musteri kendi telefonundan da izleyebilsin: indirme QR'i.
+     Footer'in ICINDE durur ki dolu panoda kartlarin ustune binmesin. */
+  .qr{background:#fff;border-radius:1.4vh;padding:1.2vh;text-align:center;
+      box-shadow:0 10px 30px rgba(0,0,0,.35)}
+  .qr img{display:block;width:10.5vh;height:10.5vh}
+  .qr s{text-decoration:none;display:block;margin-top:.6vh;font-size:1.3vh;
+        font-weight:800;color:#0f172a;max-width:12vh}
+  .foot-right{display:flex;flex-direction:column;align-items:flex-end;gap:.8vh}
+  /* Dikey TV / dar ekran: sutunlar alt alta */
+  @media (max-aspect-ratio: 4/5){.cols{grid-template-columns:1fr;align-content:start}
+    .pair p{max-width:88vw}}
+</style>
+</head>
+<body>
+<header>
+  <img class="mark" src="/washpro/poster/mark.png" alt="WashPro">
+  <div><div class="brand">WASHPRO</div><div class="biz" id="biz"></div></div>
+  <div class="right"><div class="clock" id="clock"></div><div class="date" id="date"></div></div>
+</header>
+<div class="cols" id="cols"><div class="err" id="msg">…</div></div>
+<footer>
+  <span></span>
+  <div class="foot-right">
+    <div class="qr"><img src="/washpro/poster/qr-get.png" alt="QR"><s id="qrTxt"></s></div>
+    <span>tanrikuluapps.com</span>
+  </div>
+</footer>
+<script src="/t/i18n.js"></script>
+<script src="/washpro/pano/qrcode.min.js"></script>
+<script>
+const SUPA = 'https://jlnxyqcjczqtbvviduof.supabase.co';
+const KEY  = 'sb_publishable_h5ZwQrTIoDnBZ6V4YBC0NA_59g2PvOh';
+// Kod: adresteki #token (geriye uyum) ya da onceki eslestirmeden
+// localStorage. Ikisi de yoksa eslestirme ekrani acilir.
+let token = (location.hash || '').replace('#','').trim()
+    || localStorage.getItem('panoToken') || '';
+
+// "Su an bekleyen arac yok" — /t/ sozlugunde olmayan tek metin.
+const EMPTY = {
+  tr:'Şu an bekleyen araç yok', en:'No cars waiting right now',
+  de:'Gerade keine wartenden Fahrzeuge', fr:'Aucun véhicule en attente',
+  es:'No hay coches en espera', it:'Nessuna auto in attesa',
+  pt:'Nenhum carro na fila agora', nl:'Momenteel geen wachtende auto’s',
+  sv:'Inga bilar i kö just nu', pl:'Obecnie brak aut w kolejce',
+  cs:'Momentálně žádná auta ve frontě', ro:'Nicio mașină în așteptare acum',
+  el:'Κανένα όχημα σε αναμονή', ru:'Сейчас нет машин в очереди',
+  uk:'Зараз немає авто в черзі', az:'Hazırda gözləyən avtomobil yoxdur',
+  ar:'لا توجد سيارات منتظرة الآن', he:'אין כרגע רכבים בהמתנה',
+  fa:'فعلاً خودرویی در انتظار نیست', ur:'اس وقت کوئی گاڑی قطار میں نہیں',
+  hi:'अभी कोई गाड़ी कतार में नहीं', id:'Tidak ada mobil menunggu saat ini',
+  vi:'Hiện không có xe nào đang chờ', th:'ยังไม่มีรถรอในตอนนี้',
+  ja:'現在お待ちの車はありません', ko:'지금 대기 중인 차량이 없습니다',
+  zh:'当前没有等候的车辆'
+};
+
+// Eslestirme yonergesi (TV ekraninda gorunur).
+const PAIR = {
+  tr:'Bu ekranı bağlamak için WashPro uygulamasında Ayarlar → TV Panosu → "TV\'deki karekodu okut" adımını izle',
+  en:'To connect this screen, open the WashPro app: Settings → TV Board → "Scan the QR on the TV"',
+  de:'Zum Verbinden in der WashPro-App: Einstellungen → TV-Tafel → „QR-Code am TV scannen“',
+  fr:'Pour connecter cet écran : appli WashPro → Réglages → Tableau TV → « Scanner le QR du téléviseur »',
+  es:'Para conectar esta pantalla: app WashPro → Ajustes → Panel de TV → «Escanear el QR del televisor»',
+  it:'Per collegare questo schermo: app WashPro → Impostazioni → Bacheca TV → “Scansiona il QR sul TV”',
+  pt:'Para conectar esta tela: app WashPro → Ajustes → Painel de TV → "Escanear o QR da TV"',
+  nl:'Om dit scherm te koppelen: WashPro-app → Instellingen → TV-bord → "Scan de QR op de tv"',
+  sv:'Koppla skärmen: WashPro-appen → Inställningar → TV-tavla → "Skanna QR-koden på TV:n"',
+  pl:'Aby połączyć ekran: aplikacja WashPro → Ustawienia → Tablica TV → „Zeskanuj kod QR z telewizora"',
+  cs:'Připojení obrazovky: aplikace WashPro → Nastavení → TV tabule → „Naskenuj QR z televize"',
+  ro:'Pentru a conecta ecranul: aplicația WashPro → Setări → Panou TV → „Scanează codul QR de pe TV"',
+  el:'Για σύνδεση της οθόνης: εφαρμογή WashPro → Ρυθμίσεις → Πίνακας TV → «Σάρωσε το QR της τηλεόρασης»',
+  ru:'Чтобы подключить экран: приложение WashPro → Настройки → ТВ-табло → «Сканировать QR с телевизора»',
+  uk:'Щоб під\'єднати екран: застосунок WashPro → Налаштування → ТВ-табло → «Сканувати QR з телевізора»',
+  az:'Bu ekranı bağlamaq üçün WashPro tətbiqində Ayarlar → TV Lövhəsi → "TV-dəki kodu oxut" addımını izlə',
+  ar:'لربط هذه الشاشة: تطبيق WashPro ← الإعدادات ← شاشة العرض ← «امسح رمز QR على التلفاز»',
+  he:'לחיבור המסך: אפליקציית WashPro → הגדרות → לוח טלוויזיה → "סרוק את הקוד שבטלוויזיה"',
+  fa:'برای اتصال این صفحه: برنامه WashPro → تنظیمات → تابلوی تلویزیون → «کد QR روی تلویزیون را اسکن کن»',
+  ur:'اس اسکرین کو جوڑنے کے لیے: WashPro ایپ → ترتیبات → ٹی وی بورڈ → «ٹی وی پر موجود QR اسکین کریں»',
+  hi:'इस स्क्रीन को जोड़ने के लिए: WashPro ऐप → सेटिंग्स → टीवी बोर्ड → "टीवी पर दिख रहा QR स्कैन करें"',
+  id:'Untuk menghubungkan layar ini: aplikasi WashPro → Setelan → Papan TV → "Pindai QR di TV"',
+  vi:'Để kết nối màn hình này: ứng dụng WashPro → Cài đặt → Bảng TV → "Quét mã QR trên TV"',
+  th:'เชื่อมต่อหน้าจอนี้: แอป WashPro → การตั้งค่า → บอร์ดทีวี → "สแกน QR บนทีวี"',
+  ja:'この画面を接続するには:WashProアプリ → 設定 → TVボード →「テレビのQRを読み取る」',
+  ko:'이 화면을 연결하려면: WashPro 앱 → 설정 → TV 보드 → "TV의 QR 스캔"',
+  zh:'连接此屏幕:WashPro 应用 → 设置 → 电视看板 → "扫描电视上的二维码"'
+};
+
+const LANG = (function(){
+  const q = new URLSearchParams(location.search).get('lang');
+  if (q && T[q]) return q;
+  for (const n of (navigator.languages || [navigator.language || 'en'])) {
+    const c = String(n).slice(0,2).toLowerCase();
+    if (T[c]) return c;
+  }
+  return 'en';
+})();
+const L = T[LANG];
+document.documentElement.lang = LANG;
+if (['ar','fa','he','ur'].includes(LANG)) document.documentElement.dir = 'rtl';
+document.getElementById('qrTxt').textContent = L.dl;
+
+function tick(){
+  const now = new Date();
+  document.getElementById('clock').textContent =
+    now.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+  document.getElementById('date').textContent =
+    now.toLocaleDateString(LANG, {weekday:'long', day:'numeric', month:'long'});
+}
+tick(); setInterval(tick, 10000);
+
+function esc(s){const d=document.createElement('div');d.textContent=s??'';return d.innerHTML;}
+function fmtEta(iso){
+  if(!iso) return '';
+  const d = new Date(iso);
+  if (isNaN(d) || d < new Date()) return '';
+  return d.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+}
+
+function card(j, ready){
+  const eta = ready ? '' : fmtEta(j.eta_ready_at);
+  const side = ready
+    ? `<span class="ready-badge">✓ ${esc(L.statusReady)}</span>`
+    : (eta ? `<div class="eta"><s>${esc(L.trackEtaLabel)}</s><b>${eta}</b></div>` : '');
+  return `<div class="card"><span class="plate"><em>${esc(j.plate)}</em></span>${side}</div>`;
+}
+
+function render(data){
+  const cols = document.getElementById('cols');
+  if (!data){
+    cols.innerHTML = `<div class="err">${esc(L.trackNotFound)}</div>`;
+    return;
+  }
+  document.getElementById('biz').textContent = data.business || '';
+  const jobs = data.jobs || [];
+  if (!jobs.length){
+    cols.innerHTML = `<div class="empty"><s>✨</s>${esc(EMPTY[LANG] || EMPTY.en)}</div>`;
+    return;
+  }
+  const by = s => jobs.filter(j => j.status === s);
+  const col = (cls, title, list, ready) => `
+    <div class="col ${cls}"><h2><span class="dot"></span>${esc(title)}
+      <span class="n">${list.length}</span></h2>
+      ${list.map(j => card(j, ready)).join('')}</div>`;
+  // Islem sirasina gore soldan saga: kuyruk -> islemde -> hazir
+  // (Osman'in istegi; surec dogal akisiyla okunur).
+  cols.innerHTML =
+    col('c-queued',  L.statusQueued,  by('queued'),  false) +
+    col('c-washing', L.statusWashing, by('washing'), false) +
+    col('c-ready',   L.statusReady,   by('ready'),   true);
+}
+
+async function rpc(name, params){
+  const r = await fetch(`${SUPA}/rest/v1/rpc/${name}`, {
+    method:'POST',
+    headers:{'Content-Type':'application/json','apikey':KEY,
+             'Authorization':`Bearer ${KEY}`},
+    body: JSON.stringify(params)
+  });
+  if (!r.ok) throw new Error(String(r.status));
+  return r.json();
+}
+
+// ---- Eslestirme: TV karekod OKUTAMAZ, GOSTERIR (8 Agu, Osman).
+// TV bu sayfayi kodsuz acar, buyuk bir eslestirme karekodu cizer;
+// isletmeci uygulamadan telefonla okutur. Sunucu eslesmeyi tek
+// kullanimlik teslim eder, TV kodu localStorage'a kalici yazar.
+function showPairing(){
+  const cols = document.getElementById('cols');
+  cols.innerHTML = `<div class="pair"><div class="pair-card"><div id="pairQr"></div></div>
+    <p>${esc(PAIR[LANG] || PAIR.en)}</p><s>tanrikuluapps.com/washpro/pano</s></div>`;
+  const pairId = crypto.randomUUID();
+  // Icerik URL: uygulamanin okutucusu icindeki uuid'yi alir; telefonun
+  // NORMAL kamerasiyla okutan ise bos metin degil, "uygulamadan okut"
+  // diyen yardim sayfasini gorur (/pano/e/).
+  new QRCode(document.getElementById('pairQr'), {
+    text: 'https://tanrikuluapps.com/washpro/pano/e/#' + pairId,
+    width: Math.round(innerHeight * 0.34),
+    height: Math.round(innerHeight * 0.34),
+    correctLevel: QRCode.CorrectLevel.M
+  });
+  const t = setInterval(async () => {
+    try{
+      const tok = await rpc('poll_display_pairing', {pair: pairId});
+      if (tok){
+        clearInterval(t);
+        localStorage.setItem('panoToken', tok);
+        token = tok;
+        load();
+      }
+    }catch(e){ /* ag gelip gecici; sormaya devam */ }
+  }, 3000);
+}
+
+// TV gun boyu acik kalir: TEK basarisiz istek yuzunden dolu ekrani
+// bozma. Ag hatasi (catch) ile "kod gecersiz" (sunucu null dondurdu)
+// AYRI sayilir: null iki kez ust uste gelirse kod artik gecersizdir
+// (yenilenmis olabilir) — eslestirme ekranina donulur.
+let hadData = false, misses = 0, invalid = 0;
+async function load(){
+  if (!token){ showPairing(); return; }
+  try{
+    const data = await rpc('display_board', {token});
+    if (data){ hadData = true; misses = 0; invalid = 0; render(data); }
+    else {
+      invalid++;
+      if (invalid >= 2){
+        localStorage.removeItem('panoToken');
+        token = '';
+        location.hash = '';
+        showPairing();
+      }
+    }
+  }catch(e){ misses++; if (!hadData && misses >= 4) render(null); }
+}
+load();
+setInterval(() => { if (token) load(); }, 15000);
+</script>
+</body>
+</html>
